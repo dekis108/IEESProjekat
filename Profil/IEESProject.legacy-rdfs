@@ -113,7 +113,6 @@ In a bus-branch model, the connected status is used to tell if equipment is disc
     <rdfs:subClassOf rdf:resource="#PowerSystemResource"/>
     <cims:belongsToCategory rdf:resource="#Package_Wires"/>
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#concrete"/>
-    <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
     <rdfs:comment>Represents a single wire of an alternating current line segment.</rdfs:comment>
     <rdfs:label>ACLineSegmentPhase</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
@@ -127,6 +126,12 @@ In a bus-branch model, the connected status is used to tell if equipment is disc
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:1"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
+  <rdf:Description rdf:about="#IdentifiedObject">
+    <cims:belongsToCategory rdf:resource="#Package_Core"/>
+    <rdfs:comment>This is a root class to provide common identification for all classes needing identification and naming attributes.</rdfs:comment>
+    <rdfs:label>IdentifiedObject</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
   <rdf:Description rdf:about="#IdentifiedObject.mRID">
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#attribute"/>
     <rdfs:comment>Master resource identifier issued by a model authority. The mRID is globally unique within an exchange context.
@@ -138,17 +143,10 @@ For CIMXML data files in RDF syntax, the mRID is mapped to rdf:ID or rdf:about a
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:1"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#IdentifiedObject">
-    <cims:belongsToCategory rdf:resource="#Package_Core"/>
-    <rdfs:comment>This is a root class to provide common identification for all classes needing identification and naming attributes.</rdfs:comment>
-    <rdfs:label>IdentifiedObject</rdfs:label>
-    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#ACLineSegmentPhase.ACLineSegment">
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
     <rdfs:comment>The line segment to which the phase belongs.</rdfs:comment>
     <rdfs:label>ACLineSegment</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#ACLineSegment.ACLineSegmentPhases"/>
     <rdfs:range rdf:resource="#ACLineSegment"/>
     <rdfs:domain rdf:resource="#ACLineSegmentPhase"/>
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..1"/>
@@ -172,7 +170,6 @@ For CIMXML data files in RDF syntax, the mRID is mapped to rdf:ID or rdf:about a
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
     <rdfs:comment>The starting terminal for the calculation of distances along the second branch of the mutual coupling.</rdfs:comment>
     <rdfs:label>Second_Terminal</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#Terminal.HasSecond_MutualCoupling"/>
     <rdfs:range rdf:resource="#Terminal"/>
     <rdfs:domain rdf:resource="#MutualCoupling"/>
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..1"/>
@@ -215,16 +212,6 @@ For CIMXML data files in RDF syntax, the mRID is mapped to rdf:ID or rdf:about a
     <rdfs:label>Conductor</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#Terminal.HasSecond_MutualCoupling">
-    <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
-    <rdfs:comment>Mutual couplings with the branch associated as the first branch.</rdfs:comment>
-    <rdfs:label>HasSecond_MutualCoupling</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#MutualCoupling.Second_Terminal"/>
-    <rdfs:range rdf:resource="#MutualCoupling"/>
-    <rdfs:domain rdf:resource="#Terminal"/>
-    <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..n"/>
-    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#MutualCoupling.g0ch">
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#attribute"/>
     <rdfs:comment>Zero sequence mutual coupling shunt (charging) conductance, uniformly distributed, of the entire line section.</rdfs:comment>
@@ -255,16 +242,6 @@ For CIMXML data files in RDF syntax, the mRID is mapped to rdf:ID or rdf:about a
     <rdfs:range rdf:resource="#Length"/>
     <rdfs:domain rdf:resource="#MutualCoupling"/>
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:1"/>
-    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#ACLineSegment.ACLineSegmentPhases">
-    <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
-    <rdfs:comment>The line segment phases which belong to the line segment.</rdfs:comment>
-    <rdfs:label>ACLineSegmentPhases</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#ACLineSegmentPhase.ACLineSegment"/>
-    <rdfs:range rdf:resource="#ACLineSegmentPhase"/>
-    <rdfs:domain rdf:resource="#ACLineSegment"/>
-    <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..n"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
   <rdf:Description rdf:about="#SinglePhaseKind">
@@ -419,7 +396,6 @@ Currently, normative parts of the model support the needs of information exchang
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
     <rdfs:comment>The conducting equipment of the terminal.  Conducting equipment have  terminals that may be connected to other conducting equipment terminals via connectivity nodes or topological nodes.</rdfs:comment>
     <rdfs:label>ConductingEquipment</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#ConductingEquipment.Terminals"/>
     <rdfs:range rdf:resource="#ConductingEquipment"/>
     <rdfs:domain rdf:resource="#Terminal"/>
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..1"/>
@@ -439,16 +415,6 @@ Currently, normative parts of the model support the needs of information exchang
     <cims:dataType rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     <rdfs:domain rdf:resource="#Terminal"/>
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:1"/>
-    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#ConductingEquipment.Terminals">
-    <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
-    <rdfs:comment>Conducting equipment have terminals that may be connected to other conducting equipment terminals via connectivity nodes or topological nodes.</rdfs:comment>
-    <rdfs:label>Terminals</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#Terminal.ConductingEquipment"/>
-    <rdfs:range rdf:resource="#Terminal"/>
-    <rdfs:domain rdf:resource="#ConductingEquipment"/>
-    <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..n"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
   <rdf:Description rdf:about="#ACLineSegment.x">
@@ -494,16 +460,6 @@ The attribute aliasName is retained because of backwards compatibility between C
     <rdfs:label>s2</rdfs:label>
     <rdf:type rdf:resource="#PhaseCode"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#Terminal.HasFirst_MutualCoupling">
-    <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
-    <rdfs:comment>Mutual couplings associated with the branch as the first branch.</rdfs:comment>
-    <rdfs:label>HasFirst_MutualCoupling</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#MutualCoupling.First_Terminal"/>
-    <rdfs:range rdf:resource="#MutualCoupling"/>
-    <rdfs:domain rdf:resource="#Terminal"/>
-    <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..n"/>
-    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#PhaseCode.ABN">
     <rdfs:comment>Phases A, B, and neutral.</rdfs:comment>
     <rdfs:label>ABN</rdfs:label>
@@ -513,7 +469,6 @@ The attribute aliasName is retained because of backwards compatibility between C
     <rdfs:subClassOf rdf:resource="#IdentifiedObject"/>
     <cims:belongsToCategory rdf:resource="#Package_Wires"/>
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#concrete"/>
-    <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
     <rdfs:comment>This class represents the zero sequence line mutual coupling.</rdfs:comment>
     <rdfs:label>MutualCoupling</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
@@ -574,7 +529,6 @@ Residential and small commercial loads are often served from single-phase, or sp
     <cims:stereotype rdf:resource="http://langdale.com.au/2005/UML#byreference"/>
     <rdfs:comment>The starting terminal for the calculation of distances along the first branch of the mutual coupling.  Normally MutualCoupling would only be used for terminals of AC line segments.  The first and second terminals of a mutual coupling should point to different AC line segments.</rdfs:comment>
     <rdfs:label>First_Terminal</rdfs:label>
-    <cims:inverseRoleName rdf:resource="#Terminal.HasFirst_MutualCoupling"/>
     <rdfs:range rdf:resource="#Terminal"/>
     <rdfs:domain rdf:resource="#MutualCoupling"/>
     <cims:multiplicity rdf:resource="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#M:0..1"/>
