@@ -865,26 +865,42 @@ namespace FTN.Common
 		# region Initialization of metadata
 
 		private void InitializeTypeIdsInInsertOrder()
-		{			
+		{
+
+			typeIdsInInsertOrder.Add(ModelCode.TERMINAL);
+			typeIdsInInsertOrder.Add(ModelCode.MUTUALCOUPLING);
+			typeIdsInInsertOrder.Add(ModelCode.ACLINESEGMENT);
+			typeIdsInInsertOrder.Add(ModelCode.ACLINESEGMENTPHASE);
+			/*
 			typeIdsInInsertOrder.Add(ModelCode.BASEVOLTAGE);
 			typeIdsInInsertOrder.Add(ModelCode.LOCATION);
 			typeIdsInInsertOrder.Add(ModelCode.POWERTR);
 			typeIdsInInsertOrder.Add(ModelCode.POWERTRWINDING);
-			typeIdsInInsertOrder.Add(ModelCode.WINDINGTEST);			
+			typeIdsInInsertOrder.Add(ModelCode.WINDINGTEST);
+			*/
 		}
 
 		private void InitializeNotSettablePropertyIds()
-		{			
+		{
+			notSettablePropertyIds.Add(ModelCode.IDOBJ_GID);
+			notSettablePropertyIds.Add(ModelCode.TERMINAL_HASFIRSTMUTUALCOUPL);
+			notSettablePropertyIds.Add(ModelCode.TERMINAL_HASSECONDTMUTUALCOUPL);
+			notSettablePropertyIds.Add(ModelCode.ACLINESEGMENT_PHASES);
+			notSettablePropertyIds.Add(ModelCode.CONDEQ_TERMINALS);
+
+
+			/*
 			notSettablePropertyIds.Add(ModelCode.IDOBJ_GID);
 			notSettablePropertyIds.Add(ModelCode.BASEVOLTAGE_CONDEQS);
 			notSettablePropertyIds.Add(ModelCode.LOCATION_PSRS);
 			notSettablePropertyIds.Add(ModelCode.POWERTRWINDING_TESTS);
-            notSettablePropertyIds.Add(ModelCode.POWERTR_WINDINGS);	
+            notSettablePropertyIds.Add(ModelCode.POWERTR_WINDINGS);
+			*/
 		}
-	
-		# endregion Initialization of metadata
 
-		# region Switching between enums and values
+		#endregion Initialization of metadata
+
+		#region Switching between enums and values
 
 		private List<ModelCode> SwitchLongsToModelCodes(List<long> longValues)
 		{
