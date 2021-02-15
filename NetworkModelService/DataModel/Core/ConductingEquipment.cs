@@ -10,12 +10,14 @@ using FTN.Common;
 namespace FTN.Services.NetworkModelService.DataModel.Core
 {
 	public class ConductingEquipment : Equipment
-	{		
-		//private PhaseCode phases;
-		//private float ratedVoltage;
-		//private long baseVoltage = 0;
-			
-		public ConductingEquipment(long globalId) : base(globalId) 
+	{
+        //private PhaseCode phases;
+        //private float ratedVoltage;
+        //private long baseVoltage = 0;
+
+        public List<long> Terminals { get; set; }
+
+        public ConductingEquipment(long globalId) : base(globalId) 
 		{
 		}
 
@@ -50,7 +52,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			if (base.Equals(obj))
 			{
 				ConductingEquipment x = (ConductingEquipment)obj;
-				return true; //?
+				return CompareHelper.CompareLists(x.Terminals, this.Terminals);
 			}
 			else
 			{
@@ -63,12 +65,13 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			return base.GetHashCode();
 		}
 
-		#region IAccess implementation
 
 		public override bool HasProperty(ModelCode property)
 		{
 			switch (property)
 			{
+				case ModelCode.CONDEQ_TERMINALS:
+					return true;
 
 				default:
 					return base.HasProperty(property);
@@ -79,6 +82,9 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		{
 			switch (prop.Id)
 			{
+				case ModelCode.CONDEQ_TERMINALS:
+					prop.SetValue(Terminals);
+					break;
 
 				default:
 					base.GetProperty(prop);
@@ -90,16 +96,20 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		{
 			switch (property.Id)
 			{
-
 				default:
 					base.SetProperty(property);
 					break;
 			}
-		}	
+		}
 
-		#endregion IAccess implementation
+		public override bool IsReferenced
+		{
+			get
+			{
+				return Terminals.Count > 0 || base.IsReferenced;
+			}
+		}
 
-		#region IReference implementation
 
 		public override void GetReferences(Dictionary<ModelCode, List<long>> references, TypeOfReference refType)
 		{
@@ -111,9 +121,54 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			}
 			*/
 
+			if (Terminals != null && Terminals.Count > 0 && (refType == TypeOfReference.Target || refType == TypeOfReference.Both))
+			{
+				references[ModelCode.CONDEQ_TERMINALS] = Terminals.GetRange(0, Terminals.Count);
+			}
+
+
 			base.GetReferences(references, refType);
 		}
 
-		#endregion IReference implementation
+		public override void AddReference(ModelCode referenceId, long globalId) //TODO ovo mozda nije dobro podeseno
+		{
+			switch (referenceId)
+			{
+				case ModelCode.TERMINAL_CONDQEQ:
+					Terminals.Add(globalId);
+					break;
+
+
+				default:
+					base.AddReference(referenceId, globalId);
+					break;
+			}
+		}
+
+		public override void RemoveReference(ModelCode referenceId, long globalId)
+		{
+			switch (referenceId)
+			{
+				case ModelCode.TERMINAL_CONDQEQ:
+
+					if (Terminals.Contains(globalId))
+					{
+						Terminals.Remove(globalId);
+					}
+					else
+					{
+						CommonTrace.WriteTrace(CommonTrace.TraceWarning, "Entity (GID = 0x{0:x16}) doesn't contain reference 0x{1:x16}.", this.GlobalId, globalId);
+					}
+
+					break;
+
+				
+
+				default:
+					base.RemoveReference(referenceId, globalId);
+					break;
+			}
+		}
+
 	}
 }
