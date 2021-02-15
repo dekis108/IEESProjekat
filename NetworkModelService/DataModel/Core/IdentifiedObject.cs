@@ -42,7 +42,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		/// <summary>
 		/// Description of identified object
 		/// </summary>		
-		private string description = string.Empty;
+		//private string description = string.Empty;
 		
 		/// <summary>
 		/// Initializes a new instance of the IdentifiedObject class.
@@ -94,16 +94,20 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			set { mrid = value; }
 		}
 
-		/// <summary>
-		/// Gets or sets description of the entity (identified object).
-		/// </summary>			
+        /// <summary>
+        /// Gets or sets description of the entity (identified object).
+        /// </summary>	
+        /*
 		public string Description
 		{
 			get { return description; }
 			set { description = value; }
-		}		
+		}
+		*/
 
-		public static bool operator ==(IdentifiedObject x, IdentifiedObject y)
+        public string AliasName { get; set; }
+
+        public static bool operator ==(IdentifiedObject x, IdentifiedObject y)
 		{
 			if(Object.ReferenceEquals(x, null) && Object.ReferenceEquals(y, null))
 			{
@@ -134,7 +138,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			{
 				IdentifiedObject io = (IdentifiedObject)x;
 				return ((io.GlobalId == this.GlobalId) && (io.name == this.name) && (io.mrid == this.mrid) &&
-						(io.description == this.description));
+						(io.AliasName == this.AliasName));
 			}
 		}
 		
@@ -151,7 +155,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			{
 				case ModelCode.IDOBJ_GID:				
 				case ModelCode.IDOBJ_NAME:
-				case ModelCode.IDOBJ_DESCRIPTION:
+				case ModelCode.IDOBJ_ALIASNAME:
 				case ModelCode.IDOBJ_MRID:
 					return true;
 
@@ -176,8 +180,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 					property.SetValue(mrid);
 					break;
 
-                case ModelCode.IDOBJ_DESCRIPTION:
-                    property.SetValue(description);
+                case ModelCode.IDOBJ_ALIASNAME:
+                    property.SetValue(AliasName);
                     break;
 			
 				default:
@@ -195,8 +199,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 					name = property.AsString();					
 					break;
 
-				case ModelCode.IDOBJ_DESCRIPTION:
-					description = property.AsString();					
+				case ModelCode.IDOBJ_ALIASNAME:
+					AliasName = property.AsString();					
 					break;
 
 				case ModelCode.IDOBJ_MRID:					
