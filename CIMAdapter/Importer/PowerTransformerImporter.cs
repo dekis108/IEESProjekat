@@ -93,11 +93,15 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			LogManager.Log("Loading elements and creating delta...", LogLevel.Info);
 
 			//// import all concrete model types (DMSType enum)
+			/*
 			ImportBaseVoltages();
 			ImportLocations();
 			ImportPowerTransformers();
 			ImportTransformerWindings();
 			ImportWindingTests();
+			*/
+
+			//TODO IMPORTUJ SVOJE KLASE
 
 			LogManager.Log("Loading elements and creating delta completed.", LogLevel.Info);
 		}
