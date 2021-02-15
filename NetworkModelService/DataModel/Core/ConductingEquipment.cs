@@ -11,14 +11,15 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 {
 	public class ConductingEquipment : Equipment
 	{		
-		private PhaseCode phases;
-		private float ratedVoltage;
-		private long baseVoltage = 0;
+		//private PhaseCode phases;
+		//private float ratedVoltage;
+		//private long baseVoltage = 0;
 			
 		public ConductingEquipment(long globalId) : base(globalId) 
 		{
 		}
-		
+
+		/*
 		public PhaseCode Phases
 		{
 			get
@@ -43,13 +44,13 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			get { return baseVoltage; }
 			set { baseVoltage = value; }
 		}
-
+		*/
 		public override bool Equals(object obj)
 		{
 			if (base.Equals(obj))
 			{
 				ConductingEquipment x = (ConductingEquipment)obj;
-				return (x.phases == this.phases && x.ratedVoltage == this.ratedVoltage && x.baseVoltage == this.baseVoltage);
+				return true; //?
 			}
 			else
 			{
@@ -68,10 +69,6 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		{
 			switch (property)
 			{
-				case ModelCode.CONDEQ_PHASES:				
-				case ModelCode.CONDEQ_RATEDVOLTAGE:
-				case ModelCode.CONDEQ_BASVOLTAGE:
-					return true;
 
 				default:
 					return base.HasProperty(property);
@@ -82,17 +79,6 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		{
 			switch (prop.Id)
 			{
-				case ModelCode.CONDEQ_PHASES:
-					prop.SetValue((short)phases);
-					break;
-
-				case ModelCode.CONDEQ_RATEDVOLTAGE:
-					prop.SetValue(ratedVoltage);
-					break;
-
-				case ModelCode.CONDEQ_BASVOLTAGE:
-					prop.SetValue(baseVoltage);
-					break;
 
 				default:
 					base.GetProperty(prop);
@@ -104,17 +90,6 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 		{
 			switch (property.Id)
 			{
-				case ModelCode.CONDEQ_PHASES:					
-					phases = (PhaseCode)property.AsEnum();
-					break;
-			
-				case ModelCode.CONDEQ_RATEDVOLTAGE:
-					ratedVoltage = property.AsFloat();
-					break;
-
-				case ModelCode.CONDEQ_BASVOLTAGE:
-					baseVoltage = property.AsReference();
-					break;
 
 				default:
 					base.SetProperty(property);
@@ -128,11 +103,13 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 
 		public override void GetReferences(Dictionary<ModelCode, List<long>> references, TypeOfReference refType)
 		{
+			/*
 			if (baseVoltage != 0 && (refType == TypeOfReference.Reference || refType == TypeOfReference.Both))
 			{
 				references[ModelCode.CONDEQ_BASVOLTAGE] = new List<long>();
 				references[ModelCode.CONDEQ_BASVOLTAGE].Add(baseVoltage);
 			}
+			*/
 
 			base.GetReferences(references, refType);
 		}
