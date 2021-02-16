@@ -9,16 +9,16 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 {
     public class ACLineSegment : Conductor
     {
-        public long B0CH { get; set; }
-        public long BCH { get; set; }
-        public long G0CH { get; set; }
-        public long GCH { get; set; }
+        public float B0CH { get; set; }
+        public float BCH { get; set; }
+        public float G0CH { get; set; }
+        public float GCH { get; set; }
 
-        public long R { get; set; }
-        public long R0 { get; set; }
-        public long X { get; set; }
+        public float R { get; set; }
+        public float R0 { get; set; }
+        public float X { get; set; }
 
-        public long X0 { get; set; }
+        public float X0 { get; set; }
 
         public List<long> ACLineSegmentPhases { get; set; }
 
@@ -108,28 +108,28 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 			switch (property.Id)
 			{
 				case ModelCode.ACLINESEGMENT_B0CH:
-					B0CH = property.AsLong();
+					B0CH = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_BCH:
-					BCH = property.AsLong();
+					BCH = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_G0CH:
-					G0CH = property.AsLong();
+					G0CH = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_GCH:
-					GCH = property.AsLong();
+					GCH = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_R:
-					R = property.AsLong();
+					R = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_R0:
-					R0 = property.AsLong();
+					R0 = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_X:
-					X = property.AsLong();
+					X = property.AsFloat();
 					break;
 				case ModelCode.ACLINESEGMENT_X0:
-					X0 = property.AsLong();
+					X0 = property.AsFloat();
 					break;
 				default:
 					base.SetProperty(property);

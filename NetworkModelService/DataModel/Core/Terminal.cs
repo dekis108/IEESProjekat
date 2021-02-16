@@ -10,7 +10,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
     {
         public bool Connected { get; set; }
 
-        public long PhaseCode { get; set; } //TODO mozda je neka enumeracija
+        public float PhaseCode { get; set; } //TODO mozda je neka enumeracija
 
         public int SequenceNumber { get; set; }
 
@@ -103,7 +103,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
                     Connected = property.AsBool();
                     break;
                 case ModelCode.TERMINAL_PHASE:
-                    PhaseCode = property.AsLong();
+                    PhaseCode = property.AsFloat();
                     break;
                 case ModelCode.TERMINAL_SQCNUM:
                     SequenceNumber = property.AsInt();

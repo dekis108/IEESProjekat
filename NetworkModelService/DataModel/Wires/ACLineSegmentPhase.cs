@@ -11,6 +11,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
     {
 		public long ACLineSegment { get; set; }
 
+		//TODO dodaj polje phase
+		
 		public ACLineSegmentPhase(long globalId) : base(globalId)
 		{
 		}

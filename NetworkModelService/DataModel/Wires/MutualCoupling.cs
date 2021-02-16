@@ -9,20 +9,20 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 {
     public class MutualCoupling : IdentifiedObject
     {
-		public long B0CH { get; set; }
-		public long G0CH { get; set; }
+		public float B0CH { get; set; }
+		public float G0CH { get; set; }
 
-        public long Distance11 { get; set; }
+        public float Distance11 { get; set; }
 
-        public long Distance12 { get; set; }
+        public float Distance12 { get; set; }
 
-        public long Distance21 { get; set; }
+        public float Distance21 { get; set; }
 
-        public long Distance22 { get; set; }
+        public float Distance22 { get; set; }
 
-        public long R0 { get; set; }
+        public float R0 { get; set; }
 
-		public long X0 { get; set; }
+		public float X0 { get; set; }
 
         public long FirstTerminal { get; set; }
         public long SecondTerminal { get; set; }
@@ -118,28 +118,28 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 			switch (property.Id)
 			{
 				case ModelCode.MUTUALCOUPLING_B0CH:
-					B0CH = property.AsLong();
+					B0CH = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_G0CH:
-					G0CH = property.AsLong();
+					G0CH = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_R0:
-					R0 = property.AsLong();
+					R0 = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_X0:
-					X0 = property.AsLong();
+					X0 = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_D11:
-					Distance11 = property.AsLong();
+					Distance11 = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_D12:
-					Distance12 = property.AsLong();
+					Distance12 = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_D21:
-					Distance21 = property.AsLong();
+					Distance21 = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_D22:
-					Distance22 = property.AsLong();
+					Distance22 = property.AsFloat();
 					break;
 				case ModelCode.MUTUALCOUPLING_FIRSTTERMINAL:
 					FirstTerminal = property.AsReference();
