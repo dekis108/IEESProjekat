@@ -106,7 +106,11 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			LogManager.Log("Loading elements and creating delta completed.", LogLevel.Info);
 		}
 
-		#region Import
+
+		//TODO napravi svoje import funkcije
+
+		/*
+
 		private void ImportBaseVoltages()
 		{
 			SortedDictionary<string, object> cimBaseVoltages = concreteModel.GetAllObjectsOfType("FTN.BaseVoltage");
@@ -301,7 +305,7 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			}
 			return rd;
 		}
-		#endregion Import
+		*/
 	}
 }
 

@@ -9,7 +9,8 @@
 	public static class PowerTransformerConverter
 	{
 
-		#region Populate ResourceDescription
+		//TODO: PowerTransformerConverter napravi svoje PopulateProperties...
+		/*
 		public static void PopulateIdentifiedObjectProperties(FTN.IdentifiedObject cimIdentifiedObject, ResourceDescription rd)
 		{
 			if ((cimIdentifiedObject != null) && (rd != null))
@@ -237,7 +238,7 @@
 				}
 			}
 		}
-		#endregion Populate ResourceDescription
+		*/
 
 		#region Enums convert
 		public static PhaseCode GetDMSPhaseCode(FTN.PhaseCode phases)
