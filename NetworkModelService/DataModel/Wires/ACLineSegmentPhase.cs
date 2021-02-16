@@ -11,9 +11,9 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
     {
 		public long ACLineSegment { get; set; }
 
-		//TODO dodaj polje phase
-		
-		public ACLineSegmentPhase(long globalId) : base(globalId)
+        public float Phase { get; set; }
+
+        public ACLineSegmentPhase(long globalId) : base(globalId)
 		{
 		}
 
@@ -23,7 +23,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 			if (base.Equals(obj))
 			{
 				ACLineSegmentPhase x = (ACLineSegmentPhase)obj;
-				return x.ACLineSegment == this.ACLineSegment;
+				return x.ACLineSegment == this.ACLineSegment && x.Phase == this.Phase;
 			}
 			else
 			{
@@ -41,8 +41,10 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		{
 			switch (property)
 			{
+				case ModelCode.ACLINESEGMENTPHASE_PHASE:
 				case ModelCode.ACLINESEGMENTPHASE_ACLINESEGMENT:
 					return true;
+				
 
 				default:
 					return base.HasProperty(property);
@@ -55,6 +57,9 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 			{
 				case ModelCode.ACLINESEGMENTPHASE_ACLINESEGMENT:
 					prop.SetValue(ACLineSegment);
+					break;
+				case ModelCode.ACLINESEGMENTPHASE_PHASE:
+					prop.SetValue(Phase);
 					break;
 
 				default:
@@ -69,6 +74,9 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 			{
 				case ModelCode.ACLINESEGMENTPHASE_ACLINESEGMENT:
 					ACLineSegment = property.AsReference();
+					break;
+				case ModelCode.ACLINESEGMENTPHASE_PHASE:
+					Phase = property.AsFloat();
 					break;
 
 				default:
