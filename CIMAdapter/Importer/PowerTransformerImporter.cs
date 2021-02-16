@@ -101,13 +101,34 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			ImportWindingTests();
 			*/
 
-			//TODO IMPORTUJ SVOJE KLASE
+			ImportTerminal();
+			ImportACLineSegment();
+			ImportAClineSegmentPhase();
+			ImportMutualCoupling();
+
 
 			LogManager.Log("Loading elements and creating delta completed.", LogLevel.Info);
 		}
 
 
 		//TODO napravi svoje import funkcije
+
+		private void ImportTerminal()
+        {
+			throw new NotImplementedException();
+        }
+		private void ImportACLineSegment()
+		{
+			throw new NotImplementedException();
+		}
+		private void ImportAClineSegmentPhase()
+		{
+			throw new NotImplementedException();
+		}
+		private void ImportMutualCoupling()
+		{
+			throw new NotImplementedException();
+		}
 
 		/*
 
