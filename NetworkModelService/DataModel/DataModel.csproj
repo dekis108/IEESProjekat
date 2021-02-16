@@ -95,6 +95,7 @@
     <Compile Include="Wires\ACLineSegment.cs" />
     <Compile Include="Wires\ACLineSegmentPhase.cs" />
     <Compile Include="Wires\Conductor.cs" />
+    <Compile Include="Wires\MutualCoupling.cs" />
     <Compile Include="Wires\WindingTest.cs" />
     <Compile Include="Wires\PowerTransformer.cs" />
     <Compile Include="Wires\TransformerWinding.cs" />
