@@ -34,7 +34,7 @@ namespace FTN.Common
 
 		TERMINAL                            = 0x1100000000010000,
 		TERMINAL_CONNECTED                  = 0x1100000000010101,
-		TERMINAL_PHASE                      = 0x1100000000010201,
+		TERMINAL_PHASE                      = 0x110000000001020A,
 		TERMINAL_SQCNUM                     = 0x1100000000010304, //TODO postaraj se da za integer ide 04 a ne 03
 		TERMINAL_HASFIRSTMUTUALCOUPL        = 0x1100000000010419,
 		TERMINAL_HASSECONDTMUTUALCOUPL      = 0x1100000000010519,

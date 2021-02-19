@@ -10,7 +10,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
     {
         public bool Connected { get; set; }
 
-        public float PhaseCode { get; set; } //TODO mozda je neka enumeracija
+        public PhaseCode PhaseCode { get; set; } 
 
         public int SequenceNumber { get; set; }
 
@@ -80,7 +80,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
                     prop.SetValue(HasSecondMutualCoupling);
                     break;
                 case ModelCode.TERMINAL_PHASE:
-                    prop.SetValue(PhaseCode);
+                    prop.SetValue((short)PhaseCode);
                     break;
                 case ModelCode.TERMINAL_SQCNUM:
                     prop.SetValue(SequenceNumber);
@@ -103,7 +103,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
                     Connected = property.AsBool();
                     break;
                 case ModelCode.TERMINAL_PHASE:
-                    PhaseCode = property.AsFloat();
+                    PhaseCode = (PhaseCode)property.AsFloat();
                     break;
                 case ModelCode.TERMINAL_SQCNUM:
                     SequenceNumber = property.AsInt();
