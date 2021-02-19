@@ -11,7 +11,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
     {
 		public long ACLineSegment { get; set; }
 
-        public float Phase { get; set; }
+        public SinglePhaseKind Phase { get; set; }
 
         public ACLineSegmentPhase(long globalId) : base(globalId)
 		{
@@ -59,7 +59,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 					prop.SetValue(ACLineSegment);
 					break;
 				case ModelCode.ACLINESEGMENTPHASE_PHASE:
-					prop.SetValue(Phase);
+					prop.SetValue((short)Phase);
 					break;
 
 				default:
@@ -76,7 +76,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 					ACLineSegment = property.AsReference();
 					break;
 				case ModelCode.ACLINESEGMENTPHASE_PHASE:
-					Phase = property.AsFloat();
+					Phase = (SinglePhaseKind)property.AsEnum();
 					break;
 
 				default:

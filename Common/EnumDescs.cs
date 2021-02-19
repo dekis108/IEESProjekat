@@ -17,6 +17,7 @@ namespace FTN.Common
 			property2enumType.Add(ModelCode.POWERTRWINDING_CONNTYPE, typeof(WindingConnection));
 			property2enumType.Add(ModelCode.POWERTRWINDING_WINDTYPE, typeof(WindingType));	
 			*/
+			property2enumType.Add(ModelCode.ACLINESEGMENTPHASE_PHASE, typeof(SinglePhaseKind));
 		}
 
 		public List<string> GetEnumList(ModelCode propertyId)

@@ -2,6 +2,16 @@
 
 namespace FTN.Common
 {	
+	public enum SinglePhaseKind :short
+    {
+		A = 0x0,
+		B,
+		C,
+		N,
+		s1,
+		s2
+    }
+
 	public enum PhaseCode : short
 	{
 		Unknown = 0x0,
