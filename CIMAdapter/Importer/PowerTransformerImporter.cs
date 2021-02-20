@@ -103,7 +103,7 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 
 			ImportTerminal();
 			ImportACLineSegment();
-			ImportAClineSegmentPhase();
+			ImportACLineSegmentPhase();
 			ImportMutualCoupling();
 
 
@@ -115,20 +115,179 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 
 		private void ImportTerminal()
         {
+			SortedDictionary<string, object> cimTerminals = concreteModel.GetAllObjectsOfType("FTN.Terminal");
+			if (cimTerminals != null)
+			{
+				foreach (KeyValuePair<string, object> cimTerminalsPair in cimTerminals)
+				{
+					FTN.Terminal cimTerminal = cimTerminalsPair.Value as FTN.Terminal;
+
+					ResourceDescription rd = CreateTerminalResourceDescription(cimTerminal);
+					if (rd != null)
+					{
+						delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
+						report.Report.Append("Terminal ID = ").Append(cimTerminal.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+					}
+					else
+					{
+						report.Report.Append("Terminal ID = ").Append(cimTerminal.ID).AppendLine(" FAILED to be converted");
+					}
+				}
+				report.Report.AppendLine();
+			}
+		}
+
+		private ResourceDescription CreateTerminalResourceDescription(FTN.Terminal cimBaseVoltage)
+		{
 			throw new NotImplementedException();
-        }
+			/*
+			 * ResourceDescription rd = null;
+			if (cimBaseVoltage != null)
+			{
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				rd = new ResourceDescription(gid);
+				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+
+				////populate ResourceDescription
+				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+			}
+			return rd;
+			 */
+
+		}
+
 		private void ImportACLineSegment()
 		{
-			throw new NotImplementedException();
+			SortedDictionary<string, object> cimACLineSegments = concreteModel.GetAllObjectsOfType("FTN.ACLineSegment");
+			if (cimACLineSegments != null)
+			{
+				foreach (KeyValuePair<string, object> cimClassPair in cimACLineSegments)
+				{
+					FTN.ACLineSegment cimTerminal = cimClassPair.Value as FTN.ACLineSegment;
+
+					ResourceDescription rd = CreateACLineSegmentResourceDescription(cimTerminal);
+					if (rd != null)
+					{
+						delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
+						report.Report.Append("ACLineSegment ID = ").Append(cimTerminal.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+					}
+					else
+					{
+						report.Report.Append("ACLineSegment ID = ").Append(cimTerminal.ID).AppendLine(" FAILED to be converted");
+					}
+				}
+				report.Report.AppendLine();
+			}
 		}
-		private void ImportAClineSegmentPhase()
+
+		private ResourceDescription CreateACLineSegmentResourceDescription(FTN.ACLineSegment cimBaseVoltage)
 		{
 			throw new NotImplementedException();
+			/*
+			 * ResourceDescription rd = null;
+			if (cimBaseVoltage != null)
+			{
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				rd = new ResourceDescription(gid);
+				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+
+				////populate ResourceDescription
+				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+			}
+			return rd;
+			 */
+
 		}
+
+
+		private void ImportACLineSegmentPhase()
+		{
+			SortedDictionary<string, object> cimClass = concreteModel.GetAllObjectsOfType("FTN.ACLineSegmentPhase");
+			if (cimClass != null)
+			{
+				foreach (KeyValuePair<string, object> cimClassPair in cimClass)
+				{
+					FTN.ACLineSegmentPhase cimTerminal = cimClassPair.Value as FTN.ACLineSegmentPhase;
+
+					ResourceDescription rd = CreateACLineSegmentPhaseResourceDescription(cimTerminal);
+					if (rd != null)
+					{
+						delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
+						report.Report.Append("ACLineSegmentPhase ID = ").Append(cimTerminal.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+					}
+					else
+					{
+						report.Report.Append("ACLineSegmentPhase ID = ").Append(cimTerminal.ID).AppendLine(" FAILED to be converted");
+					}
+				}
+				report.Report.AppendLine();
+			}
+		}
+
+		private ResourceDescription CreateACLineSegmentPhaseResourceDescription(FTN.ACLineSegmentPhase cimBaseVoltage)
+		{
+			throw new NotImplementedException();
+			/*
+			 * ResourceDescription rd = null;
+			if (cimBaseVoltage != null)
+			{
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				rd = new ResourceDescription(gid);
+				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+
+				////populate ResourceDescription
+				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+			}
+			return rd;
+			 */
+
+		}
+
+
 		private void ImportMutualCoupling()
 		{
-			throw new NotImplementedException();
+			SortedDictionary<string, object> cimClass = concreteModel.GetAllObjectsOfType("FTN.MutualCoupling");
+			if (cimClass != null)
+			{
+				foreach (KeyValuePair<string, object> cimClassPair in cimClass)
+				{
+					FTN.MutualCoupling cimTerminal = cimClassPair.Value as FTN.MutualCoupling;
+
+					ResourceDescription rd = CreateMutualCouplingResourceDescription(cimTerminal);
+					if (rd != null)
+					{
+						delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
+						report.Report.Append("MutualCoupling ID = ").Append(cimTerminal.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+					}
+					else
+					{
+						report.Report.Append("MutualCoupling ID = ").Append(cimTerminal.ID).AppendLine(" FAILED to be converted");
+					}
+				}
+				report.Report.AppendLine();
+			}
 		}
+
+		private ResourceDescription CreateMutualCouplingResourceDescription(FTN.MutualCoupling cimBaseVoltage)
+		{
+			throw new NotImplementedException();
+			/*
+			 * ResourceDescription rd = null;
+			if (cimBaseVoltage != null)
+			{
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				rd = new ResourceDescription(gid);
+				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+
+				////populate ResourceDescription
+				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+			}
+			return rd;
+			 */
+
+		}
+
+
 
 		/*
 

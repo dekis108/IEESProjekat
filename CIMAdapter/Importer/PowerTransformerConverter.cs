@@ -240,7 +240,6 @@
 		}
 		*/
 
-		#region Enums convert
 		public static PhaseCode GetDMSPhaseCode(FTN.PhaseCode phases)
 		{
 			switch (phases)
@@ -285,6 +284,7 @@
 			}
 		}
 
+		/*
 		public static TransformerFunction GetDMSTransformerFunctionKind(FTN.TransformerFunctionKind transformerFunction)
 		{
 			switch (transformerFunction)
@@ -327,6 +327,7 @@
 					return WindingConnection.Y;
 			}
 		}
-		#endregion Enums convert
+
+		*/
 	}
 }
