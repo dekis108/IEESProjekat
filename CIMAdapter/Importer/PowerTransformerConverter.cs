@@ -1,12 +1,13 @@
 ﻿namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 {
 	using FTN.Common;
+    using System;
 
-	/// <summary>
-	/// PowerTransformerConverter has methods for populating
-	/// ResourceDescription objects using PowerTransformerCIMProfile_Labs objects.
-	/// </summary>
-	public static class PowerTransformerConverter
+    /// <summary>
+    /// PowerTransformerConverter has methods for populating
+    /// ResourceDescription objects using PowerTransformerCIMProfile_Labs objects.
+    /// </summary>
+    public static class PowerTransformerConverter
 	{
 
 		//TODO: PowerTransformerConverter napravi svoje PopulateProperties...
@@ -284,7 +285,27 @@
 			}
 		}
 
-		/*
+        internal static void PopulateACLineSegmentPhaseProperties(ACLineSegmentPhase cim, ResourceDescription rd)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void PopulateACLineSegmentProperties(ACLineSegment cim, ResourceDescription rd)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void PopulateMutualCouplingProperties(MutualCoupling cim, ResourceDescription rd)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void PopulateTerminalProperties(Terminal cim, ResourceDescription rd)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*
 		public static TransformerFunction GetDMSTransformerFunctionKind(FTN.TransformerFunctionKind transformerFunction)
 		{
 			switch (transformerFunction)
@@ -329,5 +350,5 @@
 		}
 
 		*/
-	}
+    }
 }

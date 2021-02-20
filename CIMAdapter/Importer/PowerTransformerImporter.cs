@@ -137,23 +137,21 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			}
 		}
 
-		private ResourceDescription CreateTerminalResourceDescription(FTN.Terminal cimBaseVoltage)
+		private ResourceDescription CreateTerminalResourceDescription(FTN.Terminal cim)
 		{
-			throw new NotImplementedException();
-			/*
-			 * ResourceDescription rd = null;
-			if (cimBaseVoltage != null)
+			//throw new NotImplementedException();
+			
+			ResourceDescription rd = null;
+			if (cim != null)
 			{
-				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.TERMINAL, importHelper.CheckOutIndexForDMSType(DMSType.TERMINAL));
 				rd = new ResourceDescription(gid);
-				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+				PowerTransformerConverter.PopulateTerminalProperties(cim, rd);
 			}
 			return rd;
-			 */
-
 		}
 
 		private void ImportACLineSegment()
@@ -180,22 +178,21 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			}
 		}
 
-		private ResourceDescription CreateACLineSegmentResourceDescription(FTN.ACLineSegment cimBaseVoltage)
+		private ResourceDescription CreateACLineSegmentResourceDescription(FTN.ACLineSegment cim)
 		{
-			throw new NotImplementedException();
-			/*
-			 * ResourceDescription rd = null;
-			if (cimBaseVoltage != null)
+			//throw new NotImplementedException();
+
+			ResourceDescription rd = null;
+			if (cim != null)
 			{
-				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.ACLINESEGMENT, importHelper.CheckOutIndexForDMSType(DMSType.ACLINESEGMENT));
 				rd = new ResourceDescription(gid);
-				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+				PowerTransformerConverter.PopulateACLineSegmentProperties(cim, rd);
 			}
 			return rd;
-			 */
 
 		}
 
@@ -224,22 +221,20 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			}
 		}
 
-		private ResourceDescription CreateACLineSegmentPhaseResourceDescription(FTN.ACLineSegmentPhase cimBaseVoltage)
+		private ResourceDescription CreateACLineSegmentPhaseResourceDescription(FTN.ACLineSegmentPhase cim)
 		{
-			throw new NotImplementedException();
-			/*
-			 * ResourceDescription rd = null;
-			if (cimBaseVoltage != null)
+			ResourceDescription rd = null;
+			if (cim != null)
 			{
-				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.ACLINESEGMENTPHASE, 
+					importHelper.CheckOutIndexForDMSType(DMSType.ACLINESEGMENTPHASE));
 				rd = new ResourceDescription(gid);
-				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+				PowerTransformerConverter.PopulateACLineSegmentPhaseProperties(cim, rd);
 			}
 			return rd;
-			 */
 
 		}
 
@@ -268,22 +263,20 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			}
 		}
 
-		private ResourceDescription CreateMutualCouplingResourceDescription(FTN.MutualCoupling cimBaseVoltage)
+		private ResourceDescription CreateMutualCouplingResourceDescription(FTN.MutualCoupling cim)
 		{
-			throw new NotImplementedException();
-			/*
-			 * ResourceDescription rd = null;
-			if (cimBaseVoltage != null)
+			ResourceDescription rd = null;
+			if (cim != null)
 			{
-				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.BASEVOLTAGE, importHelper.CheckOutIndexForDMSType(DMSType.BASEVOLTAGE));
+				long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.MUTUALCOUPLING,
+					importHelper.CheckOutIndexForDMSType(DMSType.MUTUALCOUPLING));
 				rd = new ResourceDescription(gid);
-				importHelper.DefineIDMapping(cimBaseVoltage.ID, gid);
+				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateBaseVoltageProperties(cimBaseVoltage, rd);
+				PowerTransformerConverter.PopulateMutualCouplingProperties(cim, rd);
 			}
 			return rd;
-			 */
 
 		}
 
