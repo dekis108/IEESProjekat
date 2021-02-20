@@ -1,3 +1,33 @@
 ﻿<delta id="0">
-  <operations />
+  <operations>
+    <operation type="insert">
+      <ResourceDescriptions count="2">
+        <ResourceDescription>
+          <id gid="0x00000002ffffffff" type="ACLINESEGMENTPHASE" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="1" />
+            <Property id="IDOBJ_NAME" value="jedan" />
+            <Property id="IDOBJ_ALIASNAME" value="prvi" />
+            <Property id="ACLINESEGMENTPHASE_PHASE" value="A" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000004ffffffff" type="MUTUALCOUPLING" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="mc1" />
+            <Property id="IDOBJ_NAME" value="mc1" />
+            <Property id="IDOBJ_ALIASNAME" value="jedan" />
+            <Property id="MUTUALCOUPLING_B0CH" value="0.3" />
+            <Property id="MUTUALCOUPLING_G0CH" value="0.3" />
+            <Property id="MUTUALCOUPLING_R0" value="0.3" />
+            <Property id="MUTUALCOUPLING_X0" value="0.3" />
+            <Property id="MUTUALCOUPLING_D11" value="0.3" />
+            <Property id="MUTUALCOUPLING_D12" value="0.3" />
+            <Property id="MUTUALCOUPLING_D21" value="0.3" />
+            <Property id="MUTUALCOUPLING_D22" value="0.3" />
+          </Properties>
+        </ResourceDescription>
+      </ResourceDescriptions>
+    </operation>
+  </operations>
 </delta>

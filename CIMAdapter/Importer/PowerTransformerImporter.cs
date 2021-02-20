@@ -149,7 +149,7 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateTerminalProperties(cim, rd);
+				PowerTransformerConverter.PopulateTerminalProperties(cim, rd, importHelper, report);
 			}
 			return rd;
 		}
@@ -190,7 +190,7 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateACLineSegmentProperties(cim, rd);
+				PowerTransformerConverter.PopulateACLineSegmentProperties(cim, rd, importHelper, report);
 			}
 			return rd;
 
@@ -232,7 +232,7 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateACLineSegmentPhaseProperties(cim, rd);
+				PowerTransformerConverter.PopulateACLineSegmentPhaseProperties(cim, rd, importHelper, report);
 			}
 			return rd;
 
@@ -274,7 +274,7 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 				importHelper.DefineIDMapping(cim.ID, gid);
 
 				////populate ResourceDescription
-				PowerTransformerConverter.PopulateMutualCouplingProperties(cim, rd);
+				PowerTransformerConverter.PopulateMutualCouplingProperties(cim, rd, importHelper, report);
 			}
 			return rd;
 

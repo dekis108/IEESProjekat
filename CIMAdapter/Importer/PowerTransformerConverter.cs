@@ -241,7 +241,224 @@
 		}
 		*/
 
-		public static PhaseCode GetDMSPhaseCode(FTN.PhaseCode phases)
+		public static void PopulateIdentifiedObjectProperties(IdentifiedObject cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+        {
+			if ((cim != null) && (rd != null))
+            {
+				if (cim.MRIDHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.IDOBJ_MRID, cim.MRID));
+				}
+				if (cim.NameHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.IDOBJ_NAME, cim.Name));
+				}
+				if (cim.AliasNameHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.IDOBJ_ALIASNAME, cim.AliasName));
+				}
+			}
+		}
+
+		public static void PopulatePowerSystemResourceProperties(PowerSystemResource cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+        {
+			if ((cim != null) && (rd != null))
+            {
+				PopulateIdentifiedObjectProperties(cim, rd, importHelper, report);
+
+			}
+
+		}
+
+		public static void PopulateACLineSegmentPhaseProperties(ACLineSegmentPhase cim, ResourceDescription rd,ImportHelper importHelper, TransformAndLoadReport report)
+		{
+			if ((cim != null) && (rd != null))
+			{
+				PopulatePowerSystemResourceProperties(cim, rd, importHelper, report);
+
+
+				if (cim.PhaseHasValue)
+                {
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENTPHASE_PHASE, (short)cim.Phase));
+                }
+				if (cim.ACLineSegmentHasValue)
+                {
+					long gid = importHelper.GetMappedGID(cim.ACLineSegment.ID);
+					if (gid < 0)
+					{
+						report.Report.Append("WARNING: Convert ").Append(cim.GetType().ToString()).Append(" rdfID = \"").Append(cim.ID);
+						report.Report.Append("\" - Failed to set reference to ACLineSegment: rdfID \"").Append(cim.ACLineSegment.ID).AppendLine(" \" is not mapped to GID!");
+					}
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENTPHASE_ACLINESEGMENT, gid));
+				}
+			}
+		}
+
+		public static void PopulateEquipmentProperties(Equipment cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+        {
+			if ((cim != null) && (rd != null))
+			{
+				PopulatePowerSystemResourceProperties(cim, rd, importHelper, report);
+			}
+		}
+
+
+
+		public static void PopulateConductingEquipmentProperties(ConductingEquipment cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+        {
+			if ((cim != null) && (rd != null))
+			{
+				PopulateEquipmentProperties(cim, rd, importHelper, report);
+			}
+		}
+
+
+
+		public static void PopulateConductorProperties(Conductor cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+        {
+			if ((cim != null) && (rd != null))
+			{
+				PopulateConductingEquipmentProperties(cim, rd, importHelper, report);
+			}
+		}
+
+
+
+		public static void PopulateACLineSegmentProperties(ACLineSegment cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+		{
+			if ((cim != null) && (rd != null))
+			{
+				PopulateConductorProperties(cim, rd, importHelper, report);
+
+
+				if (cim.B0chHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_B0CH, cim.B0ch));
+				}
+				if (cim.G0chHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_G0CH, cim.G0ch));
+				}
+				if (cim.R0HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_R0, cim.R0));
+				}
+				if (cim.X0HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_X0, cim.X0));
+				}
+				if (cim.XHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_X, cim.X));
+				}
+				if (cim.RHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_R, cim.R));
+				}
+				if (cim.GchHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_GCH, cim.Gch));
+				}
+				if (cim.BchHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.ACLINESEGMENT_BCH, cim.Bch));
+				}
+			}
+		}
+
+		public static void PopulateMutualCouplingProperties(MutualCoupling cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+		{
+			if ((cim != null) && (rd != null))
+            {
+				PopulateIdentifiedObjectProperties(cim, rd, importHelper, report);
+
+				if (cim.B0chHasValue)
+                {
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_B0CH, cim.B0ch));
+				}
+				if (cim.G0chHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_G0CH, cim.G0ch));
+				}
+				if (cim.R0HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_R0, cim.R0));
+				}
+				if (cim.X0HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_X0, cim.X0));
+				}
+				if (cim.Distance11HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_D11, cim.Distance11));
+				}
+				if (cim.Distance12HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_D12, cim.Distance12));
+				}
+				if (cim.Distance21HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_D21, cim.Distance21));
+				}
+				if (cim.Distance22HasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_D22, cim.Distance22));
+				}
+				if (cim.First_TerminalHasValue)
+				{
+					long gid = importHelper.GetMappedGID(cim.First_Terminal.ID);
+					if (gid < 0)
+					{
+						report.Report.Append("WARNING: Convert ").Append(cim.GetType().ToString()).Append(" rdfID = \"").Append(cim.ID);
+						report.Report.Append("\" - Failed to set reference to First_Terminal: rdfID \"").Append(cim.First_Terminal.ID).AppendLine(" \" is not mapped to GID!");
+					}
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_FIRSTTERMINAL, gid));
+				}
+				if (cim.Second_TerminalHasValue)
+				{
+					long gid = importHelper.GetMappedGID(cim.Second_Terminal.ID);
+					if (gid < 0)
+					{
+						report.Report.Append("WARNING: Convert ").Append(cim.GetType().ToString()).Append(" rdfID = \"").Append(cim.ID);
+						report.Report.Append("\" - Failed to set reference to Second_Terminal: rdfID \"").Append(cim.First_Terminal.ID).AppendLine(" \" is not mapped to GID!");
+					}
+					rd.AddProperty(new Property(ModelCode.MUTUALCOUPLING_SECONDTERMINAL, gid));
+				}
+			}
+		}
+
+		public static void PopulateTerminalProperties(Terminal cim, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+		{
+			if ((cim != null) && (rd != null))
+			{
+				PopulateIdentifiedObjectProperties(cim, rd, importHelper, report);
+
+				if (cim.ConnectedHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.TERMINAL_CONNECTED, cim.Connected));
+				}
+				if (cim.PhasesHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.TERMINAL_PHASE, (short)cim.Phases));
+				}
+				if (cim.SequenceNumberHasValue)
+				{
+					rd.AddProperty(new Property(ModelCode.TERMINAL_SQCNUM, cim.SequenceNumber));
+				}
+				if (cim.ConductingEquipmentHasValue)
+				{
+					long gid = importHelper.GetMappedGID(cim.ConductingEquipment.ID);
+					if (gid < 0)
+					{
+						report.Report.Append("WARNING: Convert ").Append(cim.GetType().ToString()).Append(" rdfID = \"").Append(cim.ID);
+						report.Report.Append("\" - Failed to set reference to ConductingEquipment: rdfID \"").Append(cim.ConductingEquipment.ID).AppendLine(" \" is not mapped to GID!");
+					}
+					rd.AddProperty(new Property(ModelCode.TERMINAL_CONDQEQ, gid));
+				}
+			}
+		}
+
+		public static PhaseCode GetDMSPhaseCode(FTN.PhaseCode phases, ImportHelper importHelper, TransformAndLoadReport report)
 		{
 			switch (phases)
 			{
@@ -285,25 +502,7 @@
 			}
 		}
 
-        internal static void PopulateACLineSegmentPhaseProperties(ACLineSegmentPhase cim, ResourceDescription rd)
-        {
-            throw new NotImplementedException();
-        }
 
-        internal static void PopulateACLineSegmentProperties(ACLineSegment cim, ResourceDescription rd)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void PopulateMutualCouplingProperties(MutualCoupling cim, ResourceDescription rd)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void PopulateTerminalProperties(Terminal cim, ResourceDescription rd)
-        {
-            throw new NotImplementedException();
-        }
 
         /*
 		public static TransformerFunction GetDMSTransformerFunctionKind(FTN.TransformerFunctionKind transformerFunction)
