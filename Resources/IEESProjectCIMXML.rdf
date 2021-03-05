@@ -8,34 +8,34 @@
 		<cim:IdentifiedObject.mRID>AC1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>ACLine</cim:IdentifiedObject.name>
 		<cim:IdentifiedObject.aliasName>ACLine1</cim:IdentifiedObject.aliasName>
-		<cim:ACLineSegment.b0ch>0.1</cim:ACLineSegment.b0ch>
-		<cim:ACLineSegment.bch>0.2</cim:ACLineSegment.bch>
-		<cim:ACLineSegment.g0ch>0.3</cim:ACLineSegment.g0ch>
-		<cim:ACLineSegment.gch>0.4</cim:ACLineSegment.gch>
-		<cim:ACLineSegment.r>0.5</cim:ACLineSegment.r>
-		<cim:ACLineSegment.r0>0.6</cim:ACLineSegment.r0>
-		<cim:ACLineSegment.x>0.7</cim:ACLineSegment.x>
-		<cim:ACLineSegment.x0>0.8</cim:ACLineSegment.x0>
+		<cim:ACLineSegment.b0ch>1</cim:ACLineSegment.b0ch>
+		<cim:ACLineSegment.bch>2</cim:ACLineSegment.bch>
+		<cim:ACLineSegment.g0ch>3</cim:ACLineSegment.g0ch>
+		<cim:ACLineSegment.gch>4</cim:ACLineSegment.gch>
+		<cim:ACLineSegment.r>5</cim:ACLineSegment.r>
+		<cim:ACLineSegment.r0>6</cim:ACLineSegment.r0>
+		<cim:ACLineSegment.x>7</cim:ACLineSegment.x>
+		<cim:ACLineSegment.x0>8</cim:ACLineSegment.x0>
 	</cim:ACLineSegment>
 	<cim:ACLineSegment rdf:ID="ACLS_133769421">
-		<cim:IdentifiedObject.mRID>T2</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>T2</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>Terminal2</cim:IdentifiedObject.aliasName>
-		<cim:ACLineSegment.b0ch>0.11</cim:ACLineSegment.b0ch>
-		<cim:ACLineSegment.bch>0.11</cim:ACLineSegment.bch>
-		<cim:ACLineSegment.g0ch>0.11</cim:ACLineSegment.g0ch>
-		<cim:ACLineSegment.gch>0.11</cim:ACLineSegment.gch>
-		<cim:ACLineSegment.r>0.11</cim:ACLineSegment.r>
-		<cim:ACLineSegment.r0>0.11</cim:ACLineSegment.r0>
-		<cim:ACLineSegment.x>0.11</cim:ACLineSegment.x>
-		<cim:ACLineSegment.x0>0.11</cim:ACLineSegment.x0>
+		<cim:IdentifiedObject.mRID></cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name></cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName></cim:IdentifiedObject.aliasName>
+		<cim:ACLineSegment.b0ch rdf:resource="#"/>
+		<cim:ACLineSegment.bch rdf:resource="#"/>
+		<cim:ACLineSegment.g0ch rdf:resource="#"/>
+		<cim:ACLineSegment.gch rdf:resource="#"/>
+		<cim:ACLineSegment.r rdf:resource="#"/>
+		<cim:ACLineSegment.r0 rdf:resource="#"/>
+		<cim:ACLineSegment.x rdf:resource="#"/>
+		<cim:ACLineSegment.x0 rdf:resource="#"/>
 	</cim:ACLineSegment>
 <!-- ACLineSegmentPhase -->
 	<cim:ACLineSegmentPhase rdf:ID="ACLSP_637494416619123964">
 		<cim:IdentifiedObject.mRID>1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>jedan</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>prvi</cim:IdentifiedObject.aliasName>
 		<cim:ACLineSegmentPhase.phase>SinglePhaseKind.A</cim:ACLineSegmentPhase.phase>
+		<cim:IdentifiedObject.aliasName>prvi</cim:IdentifiedObject.aliasName>
 		<cim:ACLineSegmentPhase.ACLineSegment rdf:resource="#ACLS_133769420"/>
 	</cim:ACLineSegmentPhase>
 <!-- MutualCoupling -->

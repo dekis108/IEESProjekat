@@ -14,16 +14,35 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 
         public int SequenceNumber { get; set; }
 
-        public List<long> HasFirstMutualCoupling { get; set; }
+        private List<long> _HasFirstMutualCoupling = new List<long>();
+        public List<long> HasFirstMutualCoupling { 
+            get
+            {
+                return _HasFirstMutualCoupling;
+            } 
+            set
+            {
+                _HasFirstMutualCoupling = value;
+            }
+        }
 
-        public List<long> HasSecondMutualCoupling { get; set; }
+        private List<long> _HasSecondMutualCoupling = new List<long>();
+
+        public List<long> HasSecondMutualCoupling { 
+            get
+            {
+                return _HasSecondMutualCoupling;
+            }
+            set
+            {
+                _HasSecondMutualCoupling = value;
+            }
+        }
 
         public long ConductingEquipment { get; set; }
 
         public Terminal(long globalId) : base(globalId)
         {
-            HasFirstMutualCoupling = new List<long>();
-            HasSecondMutualCoupling = new List<long>();
         }
 
         public override bool Equals(object obj)
@@ -103,7 +122,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
                     Connected = property.AsBool();
                     break;
                 case ModelCode.TERMINAL_PHASE:
-                    PhaseCode = (PhaseCode)property.AsFloat();
+                    PhaseCode = (PhaseCode)property.AsEnum();
                     break;
                 case ModelCode.TERMINAL_SQCNUM:
                     SequenceNumber = property.AsInt();

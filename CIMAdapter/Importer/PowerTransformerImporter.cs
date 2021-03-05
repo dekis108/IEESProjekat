@@ -100,10 +100,9 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 			ImportTransformerWindings();
 			ImportWindingTests();
 			*/
-
-			ImportTerminal();
 			ImportACLineSegment();
 			ImportACLineSegmentPhase();
+			ImportTerminal();
 			ImportMutualCoupling();
 
 

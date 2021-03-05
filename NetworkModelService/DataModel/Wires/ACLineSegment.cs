@@ -20,12 +20,23 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 
         public float X0 { get; set; }
 
-        public List<long> ACLineSegmentPhases { get; set; }
+
+		List<long> _ACLineSegmentPhases = new List<long>();
+        public List<long> ACLineSegmentPhases { 
+			get
+            {
+				return _ACLineSegmentPhases;
+            }
+			set
+            {
+				_ACLineSegmentPhases = value;
+            }
+		}
 
 
         public ACLineSegment(long globalId) : base(globalId)
 		{
-			ACLineSegmentPhases = new List<long>();
+			//ACLineSegmentPhases = new List<long>();
 		}
 
 		public override bool Equals(object obj)
