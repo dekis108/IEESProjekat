@@ -30,7 +30,7 @@
 		<cim:ACLineSegment.x>0.11</cim:ACLineSegment.x>
 		<cim:ACLineSegment.x0>0.11</cim:ACLineSegment.x0>
 	</cim:ACLineSegment>
-<!-- ACLineSegmentPhase -->
+	<!-- ACLineSegmentPhase -->
 	<cim:ACLineSegmentPhase rdf:ID="ACLSP_637494416619123964">
 		<cim:IdentifiedObject.mRID>1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>jedan</cim:IdentifiedObject.name>
@@ -38,7 +38,7 @@
 		<cim:ACLineSegmentPhase.phase>SinglePhaseKind.A</cim:ACLineSegmentPhase.phase>
 		<cim:ACLineSegmentPhase.ACLineSegment rdf:resource="#ACLS_133769420"/>
 	</cim:ACLineSegmentPhase>
-<!-- MutualCoupling -->
+	<!-- MutualCoupling -->
 	<cim:MutualCoupling rdf:ID="MC_637494418057429001">
 		<cim:IdentifiedObject.mRID>MC1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>MC1</cim:IdentifiedObject.name>
@@ -53,7 +53,7 @@
 		<cim:MutualCoupling.x0>0.3</cim:MutualCoupling.x0>
 		<cim:MutualCoupling.First_Terminal rdf:resource="#T_637497850442793700"/>
 	</cim:MutualCoupling>
-<!-- Terminal -->
+	<!-- Terminal -->
 	<cim:Terminal rdf:ID="T_637497850442793700">
 		<cim:IdentifiedObject.mRID>T1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>T1</cim:IdentifiedObject.name>

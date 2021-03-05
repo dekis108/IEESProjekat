@@ -11,11 +11,21 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 {
 	public class ConductingEquipment : Equipment
 	{
-        //private PhaseCode phases;
-        //private float ratedVoltage;
-        //private long baseVoltage = 0;
+		//private PhaseCode phases;
+		//private float ratedVoltage;
+		//private long baseVoltage = 0;
 
-        public List<long> Terminals { get; set; }
+		List<long> _Terminals = new List<long>();
+        public List<long> Terminals { 
+			get
+            {
+				return _Terminals;
+            }
+			set
+            {
+				_Terminals = value;
+            }
+		}
 
         public ConductingEquipment(long globalId) : base(globalId) 
 		{
