@@ -24,8 +24,29 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 
 		public float X0 { get; set; }
 
-        public long FirstTerminal { get; set; }
-        public long SecondTerminal { get; set; }
+		private long _FirstTerminal = 0;
+        public long FirstTerminal { 
+			get
+            {
+				return _FirstTerminal;
+            }
+			set
+            {
+				_FirstTerminal = value;
+            }
+		}
+
+		private long _SecondTerminal;
+        public long SecondTerminal { 
+			get
+            {
+				return _SecondTerminal;
+            }
+			set
+            {
+				_SecondTerminal = value;
+            }
+		}
 
 
         public MutualCoupling(long globalId) : base(globalId)
@@ -163,6 +184,18 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 
 		public override void GetReferences(Dictionary<ModelCode, List<long>> references, TypeOfReference refType)
 		{
+			if (FirstTerminal != 0 && (refType == TypeOfReference.Reference || refType == TypeOfReference.Both))
+			{
+				references[ModelCode.TERMINAL_HASFIRSTMUTUALCOUPL] = new List<long>();
+				references[ModelCode.TERMINAL_HASFIRSTMUTUALCOUPL].Add(FirstTerminal);
+			}
+
+			if (SecondTerminal != 0 && (refType == TypeOfReference.Reference || refType == TypeOfReference.Both))
+			{
+				references[ModelCode.TERMINAL_HASSECONDTMUTUALCOUPL] = new List<long>();
+				references[ModelCode.TERMINAL_HASSECONDTMUTUALCOUPL].Add(SecondTerminal);
+			}
+
 			base.GetReferences(references, refType);
 		}
 

@@ -9,7 +9,17 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 {
     public class ACLineSegmentPhase : PowerSystemResource
     {
-		public long ACLineSegment { get; set; }
+		private long _ACLineSegment = 0;
+		public long ACLineSegment { 
+			get
+            {
+				return _ACLineSegment;
+            }
+			set
+            {
+				_ACLineSegment = value;
+            }
+		}
 
         public SinglePhaseKind Phase { get; set; }
 
@@ -96,10 +106,16 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 
 		public override void GetReferences(Dictionary<ModelCode, List<long>> references, TypeOfReference refType)
 		{
+			if (ACLineSegment != 0 && (refType == TypeOfReference.Reference || refType == TypeOfReference.Both))
+			{
+				references[ModelCode.ACLINESEGMENT_PHASES] = new List<long>();
+				references[ModelCode.ACLINESEGMENT_PHASES].Add(ACLineSegment);
+			}
+
 			base.GetReferences(references, refType);
 		}
 
-		public override void AddReference(ModelCode referenceId, long globalId) //TODO ovo mozda nije dobro podeseno
+		public override void AddReference(ModelCode referenceId, long globalId) 
 		{
 			switch (referenceId)
 			{

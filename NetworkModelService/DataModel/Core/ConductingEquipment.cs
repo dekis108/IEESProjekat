@@ -140,7 +140,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
 			base.GetReferences(references, refType);
 		}
 
-		public override void AddReference(ModelCode referenceId, long globalId) //TODO ovo mozda nije dobro podeseno
+		public override void AddReference(ModelCode referenceId, long globalId) 
 		{
 			switch (referenceId)
 			{

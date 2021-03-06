@@ -39,7 +39,17 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
             }
         }
 
-        public long ConductingEquipment { get; set; }
+        private long _ConductingEquipment = 0;
+        public long ConductingEquipment { 
+            get
+            {
+                return _ConductingEquipment;
+            }
+            set
+            {
+                _ConductingEquipment = value;
+            }
+        }
 
         public Terminal(long globalId) : base(globalId)
         {
@@ -116,7 +126,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
             switch (property.Id)
             {
                 case ModelCode.TERMINAL_CONDQEQ:
-                    ConductingEquipment = property.AsLong();
+                    ConductingEquipment = property.AsReference();
                     break;
                 case ModelCode.TERMINAL_CONNECTED:
                     Connected = property.AsBool();
@@ -154,11 +164,17 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
                 references[ModelCode.TERMINAL_HASSECONDTMUTUALCOUPL] = HasSecondMutualCoupling.GetRange(0, HasSecondMutualCoupling.Count);
             }
 
+            if (ConductingEquipment != 0 && (refType == TypeOfReference.Reference || refType == TypeOfReference.Both))
+            {
+                references[ModelCode.CONDEQ_TERMINALS] = new List<long>();
+                references[ModelCode.CONDEQ_TERMINALS].Add(ConductingEquipment);
+            }
+
 
             base.GetReferences(references, refType);
         }
 
-        public override void AddReference(ModelCode referenceId, long globalId) //TODO ovo mozda nije dobro podeseno
+        public override void AddReference(ModelCode referenceId, long globalId)
         {
             switch (referenceId)
             {
