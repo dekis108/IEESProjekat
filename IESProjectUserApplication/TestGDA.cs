@@ -93,7 +93,6 @@ namespace IESProjectUserApplication
             Console.WriteLine(message);
             CommonTrace.WriteTrace(CommonTrace.TraceError, message);
 
-            //XmlTextWriter xmlWriter = null;
             List<ResourceDescription> result = new List<ResourceDescription>(); ;
             int iteratorId = 0;
             List<long> ids = new List<long>();
@@ -109,9 +108,6 @@ namespace IESProjectUserApplication
                 resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
 
 
-                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetExtentValues_Results.xml", Encoding.Unicode); TODO
-                //xmlWriter.Formatting = Formatting.Indented;
-
                 while (resourcesLeft > 0)
                 {
                     List<ResourceDescription> rds = GdaQueryProxy.IteratorNext(numberOfResources, iteratorId);
@@ -120,8 +116,6 @@ namespace IESProjectUserApplication
                     {
                         ids.Add(rds[i].Id);
                         result.Add(rds[i]);
-                        //rds[i].ExportToXml(xmlWriter);
-                        //xmlWriter.Flush();
                     }
 
                     resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
@@ -140,15 +134,7 @@ namespace IESProjectUserApplication
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceError, message);
             }
-            finally
-            {
-                //if (xmlWriter != null)
-                //{
-                //    xmlWriter.Close();
-                //}
-            }
 
-            //return ids;
             return ResourceDescriptionToString(result);
         }
 
