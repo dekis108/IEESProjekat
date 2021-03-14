@@ -110,9 +110,6 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 		}
 
 
-		//TODO napravi svoje import funkcije
-
-
 
 		private void ImportACLineSegment()
 		{

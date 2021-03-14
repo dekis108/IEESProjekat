@@ -9,8 +9,6 @@
     /// </summary>
     public static class PowerTransformerConverter
 	{
-
-		//TODO: PowerTransformerConverter napravi svoje PopulateProperties...
 		/*
 		public static void PopulateIdentifiedObjectProperties(FTN.IdentifiedObject cimIdentifiedObject, ResourceDescription rd)
 		{
