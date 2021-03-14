@@ -21,9 +21,9 @@
         <ResourceDescription>
           <id gid="0x00000003fffffffe" type="ACLINESEGMENT" />
           <Properties>
-            <Property id="IDOBJ_MRID" value="T2" />
-            <Property id="IDOBJ_NAME" value="T2" />
-            <Property id="IDOBJ_ALIASNAME" value="Terminal2" />
+            <Property id="IDOBJ_MRID" value="AC2" />
+            <Property id="IDOBJ_NAME" value="AC2" />
+            <Property id="IDOBJ_ALIASNAME" value="AC2" />
             <Property id="ACLINESEGMENT_B0CH" value="0.11" />
             <Property id="ACLINESEGMENT_G0CH" value="0.11" />
             <Property id="ACLINESEGMENT_R0" value="0.11" />

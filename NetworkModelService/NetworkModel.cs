@@ -241,7 +241,7 @@ namespace FTN.Services.NetworkModelService
 				Dictionary<long, long> globalIdPairs = new Dictionary<long, long>();
 				delta.FixNegativeToPositiveIds(ref typesCounters, ref globalIdPairs);
 				updateResult.GlobalIdPairs = globalIdPairs;
-				delta.SortOperations();
+				//delta.SortOperations(); //OVAJ JE BIO KRIV
 
 				applyingStarted = true;
 
