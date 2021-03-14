@@ -14,9 +14,9 @@
                         <TextBlock Text="Extent Values" ></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Margin="0,0,401,0">
-                    <ComboBox x:Name="comboBoxModelSelect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="250" Initialized="comboBoxModelSelect_Initialized"/>
-                    <Button x:Name="btnExtentValues" Content="Get Extent Values" HorizontalAlignment="Left" Margin="267,12,0,0" VerticalAlignment="Top" Width="108" Click="btnExtentValues_Click"/>
+                <Grid>
+                    <ComboBox x:Name="comboBoxModelSelect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="250" Initialized="comboBoxModelSelect_Initialized" Grid.ColumnSpan="3"/>
+                    <Button x:Name="btnExtentValues" Content="Get Extent Values" HorizontalAlignment="Left" Margin="275,12,0,0" VerticalAlignment="Top" Width="108" Click="btnExtentValues_Click"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -25,6 +25,10 @@
                         <TextBlock Text="Values" ></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
+                <Grid>
+                    <ComboBox x:Name="comboBoxIdSelect" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Margin="10,10,0,0" Initialized="comboBoxIdSelect_Initialized" Grid.ColumnSpan="3"/>
+                    <Button x:Name="btnGetValues" Content="Get Values" HorizontalAlignment="Left" Margin="275,12,0,0" VerticalAlignment="Top" Width="108" Click="btnGetValues_Click"/>
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -33,6 +37,7 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
+
         </TabControl>
         <ScrollViewer Margin="397,21,10,10">
             <TextBlock x:Name="txtBlockOutput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>

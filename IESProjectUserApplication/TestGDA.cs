@@ -44,13 +44,12 @@ namespace IESProjectUserApplication
 
         #region GDAQueryService
 
-        public ResourceDescription GetValues(long globalId)
+        public string GetValues(long globalId)
         {
             string message = "Getting values method started.";
             Console.WriteLine(message);
             CommonTrace.WriteTrace(CommonTrace.TraceError, message);
 
-            XmlTextWriter xmlWriter = null;
             ResourceDescription rd = null;
 
             try
@@ -59,11 +58,6 @@ namespace IESProjectUserApplication
                 List<ModelCode> properties = modelResourcesDesc.GetAllPropertyIds((DMSType)type);
 
                 rd = GdaQueryProxy.GetValues(globalId, properties);
-
-                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetValues_Results.xml", Encoding.Unicode);
-                xmlWriter.Formatting = Formatting.Indented;
-                rd.ExportToXml(xmlWriter);
-                xmlWriter.Flush();
 
                 message = "Getting values method successfully finished.";
                 Console.WriteLine(message);
@@ -75,15 +69,8 @@ namespace IESProjectUserApplication
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceError, message);
             }
-            finally
-            {
-                if (xmlWriter != null)
-                {
-                    xmlWriter.Close();
-                }
-            }
 
-            return rd;
+            return ResourceDescriptionToString(new List<ResourceDescription>() { rd });
         }
 
 
@@ -232,9 +219,6 @@ namespace IESProjectUserApplication
             return result;
         }
 
-
-
-
         #region Test Methods
 
         public List<long> TestGetExtentValuesAllTypes()
@@ -253,6 +237,11 @@ namespace IESProjectUserApplication
             {
                 foreach (DMSType type in Enum.GetValues(typeof(DMSType)))
                 {
+                    if (type ==  DMSType.MASK_TYPE)
+                    {
+                        continue;
+                    }
+
                     currType = type;
                     properties = modelResourcesDesc.GetAllPropertyIds(type);
 

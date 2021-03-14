@@ -26,8 +26,8 @@ namespace IESProjectUserApplication
 
         public MainWindow()
         {
-            InitializeComponent();
             IntializeTestGda();
+            InitializeComponent();
         }
 
         private void IntializeTestGda()
@@ -37,13 +37,16 @@ namespace IESProjectUserApplication
 
         private void comboBoxModelSelect_Initialized(object sender, EventArgs e)
         {
-            List<ModelCode> modelCodes = new List<ModelCode>()
+            List<ModelCode> modelCodes = new List<ModelCode>();
+         
+            foreach(DMSType type in Enum.GetValues(typeof(DMSType))) //depends on DMSType and ModelCode having the same string name
             {
-                ModelCode.ACLINESEGMENT,
-                ModelCode.ACLINESEGMENTPHASE,
-                ModelCode.TERMINAL,
-                ModelCode.MUTUALCOUPLING
-            };
+                if (type == DMSType.MASK_TYPE)
+                {
+                    continue;
+                }
+                modelCodes.Add((ModelCode)Enum.Parse(typeof(ModelCode), type.ToString()));
+            }
 
             comboBoxModelSelect.ItemsSource = modelCodes;
             comboBoxModelSelect.SelectedItem = comboBoxModelSelect.Items[0];
@@ -54,6 +57,15 @@ namespace IESProjectUserApplication
             txtBlockOutput.Text = tgda.GetExtentValues((ModelCode)comboBoxModelSelect.SelectedItem);
         }
 
-        
+        private void comboBoxIdSelect_Initialized(object sender, EventArgs e)
+        {
+            comboBoxIdSelect.ItemsSource = tgda.TestGetExtentValuesAllTypes();
+            comboBoxIdSelect.SelectedItem = comboBoxIdSelect.Items[0];
+        }
+
+        private void btnGetValues_Click(object sender, RoutedEventArgs e)
+        {
+            txtBlockOutput.Text = tgda.GetValues((long)comboBoxIdSelect.SelectedItem);
+        }
     }
 }
