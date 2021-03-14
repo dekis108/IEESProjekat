@@ -11,7 +11,7 @@ using System.Threading;
 using System.Diagnostics;
 using FTN.Common;
 using FTN.ServiceContracts;
-
+using System.Collections;
 
 namespace IESProjectUserApplication
 {
@@ -224,10 +224,21 @@ namespace IESProjectUserApplication
 
             foreach (ResourceDescription rd in rds)
             {
-                result += string.Format($"Resource: {rd.Id}");
+                result += string.Format($"Resource: {rd.Id}\n");
                 foreach (Property prop in rd.Properties)
                 {
-                    result += string.Format($"\t{prop.GetType().ToString()} : {prop.GetValue().ToString()}\n");
+                    if (prop.GetValue() is IList)
+                    {
+                        result += string.Format($"  {prop.Id}:\n");
+                        foreach (var element in (IList)prop.GetValue())
+                        {
+                            result += string.Format($"\t\t\t{element.ToString()}\n");
+                        }
+                    }
+                    else 
+                    {
+                        result += string.Format($"  {prop.Id} : {prop.GetValue()}\n");
+                    }
                 }
                 result += "\n";
             }
