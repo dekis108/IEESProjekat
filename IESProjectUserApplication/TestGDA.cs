@@ -60,7 +60,7 @@ namespace IESProjectUserApplication
 
                 rd = GdaQueryProxy.GetValues(globalId, properties);
 
-                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetValues_Results.xml", Encoding.Unicode);  TODO
+                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetValues_Results.xml", Encoding.Unicode);
                 xmlWriter.Formatting = Formatting.Indented;
                 rd.ExportToXml(xmlWriter);
                 xmlWriter.Flush();
@@ -86,13 +86,15 @@ namespace IESProjectUserApplication
             return rd;
         }
 
-        public List<long> GetExtentValues(ModelCode modelCode)
+
+        public string GetExtentValues(ModelCode modelCode)
         {
             string message = "Getting extent values method started.";
             Console.WriteLine(message);
             CommonTrace.WriteTrace(CommonTrace.TraceError, message);
 
-            XmlTextWriter xmlWriter = null;
+            //XmlTextWriter xmlWriter = null;
+            List<ResourceDescription> result = new List<ResourceDescription>(); ;
             int iteratorId = 0;
             List<long> ids = new List<long>();
 
@@ -108,7 +110,7 @@ namespace IESProjectUserApplication
 
 
                 //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetExtentValues_Results.xml", Encoding.Unicode); TODO
-                xmlWriter.Formatting = Formatting.Indented;
+                //xmlWriter.Formatting = Formatting.Indented;
 
                 while (resourcesLeft > 0)
                 {
@@ -117,8 +119,9 @@ namespace IESProjectUserApplication
                     for (int i = 0; i < rds.Count; i++)
                     {
                         ids.Add(rds[i].Id);
-                        rds[i].ExportToXml(xmlWriter);
-                        xmlWriter.Flush();
+                        result.Add(rds[i]);
+                        //rds[i].ExportToXml(xmlWriter);
+                        //xmlWriter.Flush();
                     }
 
                     resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
@@ -139,13 +142,14 @@ namespace IESProjectUserApplication
             }
             finally
             {
-                if (xmlWriter != null)
-                {
-                    xmlWriter.Close();
-                }
+                //if (xmlWriter != null)
+                //{
+                //    xmlWriter.Close();
+                //}
             }
 
-            return ids;
+            //return ids;
+            return ResourceDescriptionToString(result);
         }
 
         public List<long> GetRelatedValues(long sourceGlobalId, Association association)
@@ -172,7 +176,7 @@ namespace IESProjectUserApplication
                 int iteratorId = GdaQueryProxy.GetRelatedValues(sourceGlobalId, properties, association);
                 int resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
 
-                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetRelatedValues_Results.xml", Encoding.Unicode); TODO
+                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetRelatedValues_Results.xml", Encoding.Unicode);
                 xmlWriter.Formatting = Formatting.Indented;
 
                 while (resourcesLeft > 0)
@@ -213,6 +217,26 @@ namespace IESProjectUserApplication
         }
 
         #endregion GDAQueryService
+
+        private string ResourceDescriptionToString(List<ResourceDescription> rds)
+        {
+            string result = "";
+
+            foreach (ResourceDescription rd in rds)
+            {
+                result += string.Format($"Resource: {rd.Id}");
+                foreach (Property prop in rd.Properties)
+                {
+                    result += string.Format($"\t{prop.GetType().ToString()} : {prop.GetValue().ToString()}\n");
+                }
+                result += "\n";
+            }
+
+            return result;
+        }
+
+
+
 
         #region Test Methods
 

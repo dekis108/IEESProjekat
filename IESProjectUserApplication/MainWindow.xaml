@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ComboBox x:Name="comboBoxModelSelect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="250" Initialized="comboBoxModelSelect_Initialized"/>
+        <Button x:Name="btnExtentValues" Content="Get Extent Values" HorizontalAlignment="Left" Margin="278,10,0,0" VerticalAlignment="Top" Width="117" Click="btnExtentValues_Click"/>
+        <TextBlock x:Name="txtBlockOutput" HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="356" Width="385"/>
+
     </Grid>
 </Window>

@@ -22,6 +22,8 @@ namespace IESProjectUserApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TestGda tgda;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,10 +32,28 @@ namespace IESProjectUserApplication
 
         private void IntializeTestGda()
         {
-            TestGda tgda = new TestGda();
-            MessageBoxResult result = MessageBox.Show("Uspeh","Dobro",
-                                                      MessageBoxButton.YesNo,
-                                                      MessageBoxImage.Question);
+            tgda = new TestGda();
         }
+
+        private void comboBoxModelSelect_Initialized(object sender, EventArgs e)
+        {
+            List<ModelCode> modelCodes = new List<ModelCode>()
+            {
+                ModelCode.ACLINESEGMENT,
+                ModelCode.ACLINESEGMENTPHASE,
+                ModelCode.TERMINAL,
+                ModelCode.MUTUALCOUPLING
+            };
+
+            comboBoxModelSelect.ItemsSource = modelCodes;
+            comboBoxModelSelect.SelectedItem = comboBoxModelSelect.Items[0];
+        }
+
+        private void btnExtentValues_Click(object sender, RoutedEventArgs e)
+        {
+            txtBlockOutput.Text = tgda.GetExtentValues((ModelCode)comboBoxModelSelect.SelectedItem);
+        }
+
+        
     }
 }
