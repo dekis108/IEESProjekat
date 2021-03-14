@@ -866,11 +866,10 @@ namespace FTN.Common
 
 		private void InitializeTypeIdsInInsertOrder()
 		{
-
-			typeIdsInInsertOrder.Add(ModelCode.TERMINAL);
-			typeIdsInInsertOrder.Add(ModelCode.MUTUALCOUPLING);
 			typeIdsInInsertOrder.Add(ModelCode.ACLINESEGMENT);
 			typeIdsInInsertOrder.Add(ModelCode.ACLINESEGMENTPHASE);
+			typeIdsInInsertOrder.Add(ModelCode.TERMINAL);
+			typeIdsInInsertOrder.Add(ModelCode.MUTUALCOUPLING);
 			/*
 			typeIdsInInsertOrder.Add(ModelCode.BASEVOLTAGE);
 			typeIdsInInsertOrder.Add(ModelCode.LOCATION);
