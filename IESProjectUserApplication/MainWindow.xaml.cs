@@ -40,6 +40,7 @@ namespace IESProjectUserApplication
             List<ModelCode> modelCodes = new List<ModelCode>();
          
             foreach(DMSType type in Enum.GetValues(typeof(DMSType))) //depends on DMSType and ModelCode having the same string name
+                                                                     //mozda iskoristi GetModelCodeFromType
             {
                 if (type == DMSType.MASK_TYPE)
                 {
@@ -66,6 +67,56 @@ namespace IESProjectUserApplication
         private void btnGetValues_Click(object sender, RoutedEventArgs e)
         {
             txtBlockOutput.Text = tgda.GetValues((long)comboBoxIdSelect.SelectedItem);
+        }
+
+        private void btnGetRelatedValues_Click(object sender, RoutedEventArgs e)
+        {
+            Association ass = new Association();
+            
+            tgda.GetRelatedValues((long)comboBoxIdSelectRelated.SelectedItem, ass);
+        }
+
+        private void comboBoxIdSelectRelated_Initialized(object sender, EventArgs e) 
+        {
+            comboBoxIdSelectRelated.ItemsSource = tgda.TestGetExtentValuesAllTypes();
+        }
+
+        private void comboBoxIdSelectRelated_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var source = Enum.GetValues(typeof(ModelCode));
+
+            ModelResourcesDesc modelResources = new ModelResourcesDesc();
+
+            ModelCode modelCode = modelResources.GetModelCodeFromId((long)comboBoxIdSelectRelated.SelectedItem);
+
+            string concreteType = ((long)modelCode).ToString("x");
+
+            List<string> sourceString = new List<string>();
+            foreach(ModelCode s in source)
+            {
+
+                string temp = s.ToString("x");
+                if (tgda.ModelCodeStringCompareHelper(concreteType, temp))
+                {
+                    sourceString.Add(temp);
+                }
+                
+            }
+
+            List<ModelCode> codes = new List<ModelCode>();
+            foreach(string s in sourceString)
+            {
+                codes.Add((ModelCode)long.Parse(s, System.Globalization.NumberStyles.HexNumber));
+            }
+
+            comboBoxSelectAssType.ItemsSource = codes;
+            comboBoxSelectAssType.SelectedItem = comboBoxSelectAssType.Items[0];
+        }
+
+        private void comboBoxSelectAssType_Initialized(object sender, EventArgs e)
+        {
+            comboBoxIdSelectRelated.SelectionChanged += comboBoxIdSelectRelated_SelectionChanged;
+            comboBoxIdSelectRelated.SelectedItem = comboBoxIdSelectRelated.Items[0];
         }
     }
 }

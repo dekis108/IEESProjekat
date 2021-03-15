@@ -191,6 +191,25 @@ namespace IESProjectUserApplication
 
         #endregion GDAQueryService
 
+        public bool ModelCodeStringCompareHelper(string mask, string toCheck)
+        {
+            if (mask.Length != 16 || toCheck.Length != 16)
+            {
+                return false;
+            }
+
+            for(int i = 0; i < 8; ++i)
+            {
+                if (mask[i] != '0' && toCheck[i] == '0') break; //parent 
+                if (mask[i] != toCheck[i])
+                {
+                    return false;
+                }
+            }
+
+            return toCheck[15] == '9';
+        }
+
         private string ResourceDescriptionToString(List<ResourceDescription> rds)
         {
             string result = "";
