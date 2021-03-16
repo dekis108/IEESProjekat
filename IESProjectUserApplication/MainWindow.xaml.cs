@@ -22,6 +22,7 @@ namespace IESProjectUserApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string noFilterMsg = "No filter";
         private TestGda tgda;
 
         public MainWindow()
@@ -154,6 +155,52 @@ namespace IESProjectUserApplication
 
             listBoxProperties.ItemsSource = modelResources.GetAllPropertyIds(type);
             listBoxProperties.UnselectAll();
+        }
+
+        private void listBoxPropertiesRelated_Initialized(object sender, EventArgs e)
+        {
+            comboBoxSelectAssFilter.SelectedItem = comboBoxSelectAssFilter.Items[0];
+        }
+
+        private void comboBoxSelectAssFilter_Initialized(object sender, EventArgs e)
+        {
+            List<string> modelCodes = new List<string>();
+
+            modelCodes.Add(noFilterMsg);
+
+            foreach (DMSType type in Enum.GetValues(typeof(DMSType))) //depends on DMSType and ModelCode having the same string name
+                                                                      //mozda iskoristi GetModelCodeFromType
+            {
+                if (type == DMSType.MASK_TYPE)
+                {
+                    continue;
+                }
+                modelCodes.Add(type.ToString());
+            }
+
+            comboBoxSelectAssFilter.ItemsSource = modelCodes;
+            
+        }
+
+        private void comboBoxSelectAssFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<ModelCode> props = new List<ModelCode>();
+
+            ModelResourcesDesc modelResources = new ModelResourcesDesc();
+            if (comboBoxSelectAssFilter.SelectedItem.ToString() == noFilterMsg) //set all possible properties for offer
+            {
+                foreach(ModelCode code in Enum.GetValues(typeof(ModelCode)))
+                {
+                    props.AddRange(modelResources.GetAllPropertyIds(code));
+                    props = props.Distinct().ToList();
+                }
+                
+            }
+            else
+            {
+                props = modelResources.GetAllPropertyIds((ModelCode)Enum.Parse(typeof(ModelCode),comboBoxSelectAssFilter.SelectedItem.ToString()));
+            }
+            listBoxPropertiesRelated.ItemsSource = props;
         }
     }
 }

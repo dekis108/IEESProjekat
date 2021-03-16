@@ -5,21 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IESProjectUserApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="542.126" Width="800">
     <Grid>
         <TabControl>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel>
-                        <TextBlock Text="Extent Values" ></TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-                <Grid>
-                    <ComboBox x:Name="comboBoxModelSelect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="250" Initialized="comboBoxModelSelect_Initialized" Grid.ColumnSpan="3" SelectionChanged="comboBoxModelSelect_SelectionChanged"/>
-                    <Button x:Name="btnExtentValues" Content="Get Extent Values" HorizontalAlignment="Left" Margin="275,12,0,0" VerticalAlignment="Top" Width="108" Click="btnExtentValues_Click"/>
-                    <ListBox x:Name="listBoxPropertiesExtent" HorizontalAlignment="Left" Width="250" Margin="10,61,0,10" SelectionMode="Multiple" Initialized="listBoxPropertiesExtent_Initialized" />
-                </Grid>
-            </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel>
@@ -35,13 +23,27 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel>
+                        <TextBlock Text="Extent Values" ></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <ComboBox x:Name="comboBoxModelSelect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="250" Initialized="comboBoxModelSelect_Initialized" Grid.ColumnSpan="3" SelectionChanged="comboBoxModelSelect_SelectionChanged"/>
+                    <Button x:Name="btnExtentValues" Content="Get Extent Values" HorizontalAlignment="Left" Margin="275,12,0,0" VerticalAlignment="Top" Width="108" Click="btnExtentValues_Click"/>
+                    <ListBox x:Name="listBoxPropertiesExtent" HorizontalAlignment="Left" Width="250" Margin="10,61,0,10" SelectionMode="Multiple" Initialized="listBoxPropertiesExtent_Initialized" />
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
                         <TextBlock Text="Related Values" ></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
                     <ComboBox x:Name="comboBoxIdSelectRelated" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Margin="10,10,0,0"  Grid.ColumnSpan="2" Initialized="comboBoxIdSelectRelated_Initialized"/>
-                    <Button x:Name="btnGetRelatedValues" Content="Get Values" HorizontalAlignment="Left" Margin="246.567,12,0,0" VerticalAlignment="Top" Width="108" Click="btnGetRelatedValues_Click" Grid.Column="1" />
+                    <Button x:Name="btnGetRelatedValues" Content="Get Values" HorizontalAlignment="Left" Margin="275,12,0,0" VerticalAlignment="Top" Width="108" Click="btnGetRelatedValues_Click" Grid.Column="1" />
                     <ComboBox x:Name="comboBoxSelectAssType" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Margin="10,57,0,0" Initialized="comboBoxSelectAssType_Initialized" Grid.ColumnSpan="2"/>
+                    <ComboBox x:Name="comboBoxSelectAssFilter" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Margin="10,96,0,0" Initialized="comboBoxSelectAssFilter_Initialized" SelectionChanged="comboBoxSelectAssFilter_SelectionChanged"/>
+                    <ListBox x:Name="listBoxPropertiesRelated" HorizontalAlignment="Left" Width="250" Margin="10,135,0,10" SelectionMode="Multiple" Initialized="listBoxPropertiesRelated_Initialized" />
                 </Grid>
             </TabItem>
 
