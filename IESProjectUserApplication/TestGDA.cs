@@ -44,7 +44,7 @@ namespace IESProjectUserApplication
 
         #region GDAQueryService
 
-        public string GetValues(long globalId)
+        public string GetValues(long globalId, List<ModelCode> properties)
         {
             string message = "Getting values method started.";
             Console.WriteLine(message);
@@ -55,7 +55,7 @@ namespace IESProjectUserApplication
             try
             {
                 short type = ModelCodeHelper.ExtractTypeFromGlobalId(globalId);
-                List<ModelCode> properties = modelResourcesDesc.GetAllPropertyIds((DMSType)type);
+                //List<ModelCode> properties = modelResourcesDesc.GetAllPropertyIds((DMSType)type);
 
                 rd = GdaQueryProxy.GetValues(globalId, properties);
 

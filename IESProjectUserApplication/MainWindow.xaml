@@ -27,8 +27,9 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <ComboBox x:Name="comboBoxIdSelect" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Margin="10,10,0,0" Initialized="comboBoxIdSelect_Initialized" Grid.ColumnSpan="3"/>
+                    <ComboBox x:Name="comboBoxIdSelect" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Margin="10,10,0,0" Initialized="comboBoxIdSelect_Initialized" Grid.ColumnSpan="3" SelectionChanged="comboBoxIdSelect_SelectionChanged"/>
                     <Button x:Name="btnGetValues" Content="Get Values" HorizontalAlignment="Left" Margin="275,12,0,0" VerticalAlignment="Top" Width="108" Click="btnGetValues_Click"/>
+                    <ListBox x:Name="listBoxProperties" HorizontalAlignment="Left" Width="250" Margin="10,61,0,10" SelectionMode="Multiple" Initialized="listBoxProperties_Initialized" />
                 </Grid>
             </TabItem>
             <TabItem>

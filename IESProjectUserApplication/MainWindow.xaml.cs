@@ -65,12 +65,16 @@ namespace IESProjectUserApplication
         private void comboBoxIdSelect_Initialized(object sender, EventArgs e)
         {
             comboBoxIdSelect.ItemsSource = tgda.TestGetExtentValuesAllTypes();
-            comboBoxIdSelect.SelectedItem = comboBoxIdSelect.Items[0];
         }
 
         private void btnGetValues_Click(object sender, RoutedEventArgs e)
         {
-            txtBlockOutput.Text = tgda.GetValues((long)comboBoxIdSelect.SelectedItem);
+            List<ModelCode> props = new List<ModelCode>();
+            foreach (var prop in listBoxProperties.SelectedItems)
+            {
+                props.Add((ModelCode)prop);
+            }
+            txtBlockOutput.Text = tgda.GetValues((long)comboBoxIdSelect.SelectedItem, props);
         }
 
         private void btnGetRelatedValues_Click(object sender, RoutedEventArgs e)
@@ -136,6 +140,20 @@ namespace IESProjectUserApplication
             ModelResourcesDesc modelResources = new ModelResourcesDesc();
             listBoxPropertiesExtent.ItemsSource = modelResources.GetAllPropertyIds((ModelCode)comboBoxModelSelect.SelectedItem);
             listBoxPropertiesExtent.UnselectAll();
+        }
+
+        private void listBoxProperties_Initialized(object sender, EventArgs e)
+        {
+            comboBoxIdSelect.SelectedItem = comboBoxIdSelect.Items[0];
+        }
+
+        private void comboBoxIdSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ModelResourcesDesc modelResources = new ModelResourcesDesc();
+            ModelCode type = modelResources.GetModelCodeFromId((long)comboBoxIdSelect.SelectedItem);
+
+            listBoxProperties.ItemsSource = modelResources.GetAllPropertyIds(type);
+            listBoxProperties.UnselectAll();
         }
     }
 }
