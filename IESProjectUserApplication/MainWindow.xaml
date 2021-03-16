@@ -48,7 +48,7 @@
             </TabItem>
 
         </TabControl>
-        <ScrollViewer Margin="397,21,10,10">
+        <ScrollViewer Margin="397,42,10,10">
             <TextBlock x:Name="txtBlockOutput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
         </ScrollViewer>
     </Grid>

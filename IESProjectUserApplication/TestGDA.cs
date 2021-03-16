@@ -125,7 +125,7 @@ namespace IESProjectUserApplication
             return ResourceDescriptionToString(result);
         }
 
-        public string GetRelatedValues(long sourceGlobalId, Association association)
+        public string GetRelatedValues(long sourceGlobalId, Association association, List<ModelCode> properties)
         {
             string message = "Getting related values method started.";
             Console.WriteLine(message);
@@ -138,9 +138,9 @@ namespace IESProjectUserApplication
 
             try
             {
-                List<ModelCode> properties = new List<ModelCode>();
-                properties = modelResourcesDesc.GetAllPropertyIds(ModelResourcesDesc.GetTypeFromModelCode(association.PropertyId)); //deja: moja izmena od ovoga iznad
-                //treba mi da iz npr terminal_hasfirstmutualcoupling skontam da su to pokazivaci ka mutual couplingu
+                //List<ModelCode> properties = new List<ModelCode>();
+                //properties = modelResourcesDesc.GetAllPropertyIds(ModelResourcesDesc.GetTypeFromModelCode(association.PropertyId)); 
+
 
                 int iteratorId = GdaQueryProxy.GetRelatedValues(sourceGlobalId, properties, association);
                 int resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
@@ -171,6 +171,8 @@ namespace IESProjectUserApplication
                 message = string.Format("Getting related values method  failed for sourceGlobalId = {0} and association (propertyId = {1}, type = {2}). Reason: {3}", sourceGlobalId, association.PropertyId, association.Type, e.Message);
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceError, message);
+
+                throw new ArgumentException(message);
             }
 
             return ResourceDescriptionToString(listRds);
@@ -221,7 +223,10 @@ namespace IESProjectUserApplication
                 }
                 result += "\n";
             }
-
+            if (result == "")
+            {
+                return "Empty querry result";
+            }
             return result;
         }
 

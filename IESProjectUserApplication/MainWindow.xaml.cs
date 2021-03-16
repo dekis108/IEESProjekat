@@ -83,9 +83,30 @@ namespace IESProjectUserApplication
             Association ass = new Association();
 
             ass.PropertyId = (ModelCode)comboBoxSelectAssType.SelectedItem;
-            ass.Type = ModelCode.MUTUALCOUPLING;
+            if (comboBoxSelectAssFilter.SelectedItem.ToString() == noFilterMsg)
+            {
+                ass.Type = 0;
+            }
+            else
+            {
+                ass.Type = (ModelCode)Enum.Parse(typeof(ModelCode),comboBoxSelectAssFilter.SelectedItem.ToString());
+            }
 
-            txtBlockOutput.Text = tgda.GetRelatedValues((long)comboBoxIdSelectRelated.SelectedItem, ass);
+
+            List<ModelCode> props = new List<ModelCode>();
+            foreach (var prop in listBoxPropertiesRelated.SelectedItems)
+            {
+                props.Add((ModelCode)prop);
+            }
+            try
+            {
+                txtBlockOutput.Text = tgda.GetRelatedValues((long)comboBoxIdSelectRelated.SelectedItem, ass, props);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("Selected properties do not match found instances.\nAdditional message:" + ex.Message, "Incorrect querry",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void comboBoxIdSelectRelated_Initialized(object sender, EventArgs e) 
