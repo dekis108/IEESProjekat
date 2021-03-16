@@ -50,12 +50,16 @@ namespace IESProjectUserApplication
             }
 
             comboBoxModelSelect.ItemsSource = modelCodes;
-            comboBoxModelSelect.SelectedItem = comboBoxModelSelect.Items[0];
         }
 
         private void btnExtentValues_Click(object sender, RoutedEventArgs e)
         {
-            txtBlockOutput.Text = tgda.GetExtentValues((ModelCode)comboBoxModelSelect.SelectedItem);
+            List<ModelCode> props = new List<ModelCode>();
+            foreach(var prop in listBoxPropertiesExtent.SelectedItems)
+            {
+                props.Add((ModelCode)prop);
+            }
+            txtBlockOutput.Text = tgda.GetExtentValues((ModelCode)comboBoxModelSelect.SelectedItem, props);
         }
 
         private void comboBoxIdSelect_Initialized(object sender, EventArgs e)
@@ -72,8 +76,11 @@ namespace IESProjectUserApplication
         private void btnGetRelatedValues_Click(object sender, RoutedEventArgs e)
         {
             Association ass = new Association();
-            
-            tgda.GetRelatedValues((long)comboBoxIdSelectRelated.SelectedItem, ass);
+
+            ass.PropertyId = (ModelCode)comboBoxSelectAssType.SelectedItem;
+            ass.Type = ModelCode.MUTUALCOUPLING;
+
+            txtBlockOutput.Text = tgda.GetRelatedValues((long)comboBoxIdSelectRelated.SelectedItem, ass);
         }
 
         private void comboBoxIdSelectRelated_Initialized(object sender, EventArgs e) 
@@ -117,6 +124,18 @@ namespace IESProjectUserApplication
         {
             comboBoxIdSelectRelated.SelectionChanged += comboBoxIdSelectRelated_SelectionChanged;
             comboBoxIdSelectRelated.SelectedItem = comboBoxIdSelectRelated.Items[0];
+        }
+
+        private void listBoxPropertiesExtent_Initialized(object sender, EventArgs e)
+        {
+            comboBoxModelSelect.SelectedItem = comboBoxModelSelect.Items[0];
+        }
+
+        private void comboBoxModelSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ModelResourcesDesc modelResources = new ModelResourcesDesc();
+            listBoxPropertiesExtent.ItemsSource = modelResources.GetAllPropertyIds((ModelCode)comboBoxModelSelect.SelectedItem);
+            listBoxPropertiesExtent.UnselectAll();
         }
     }
 }

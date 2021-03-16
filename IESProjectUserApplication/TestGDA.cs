@@ -74,7 +74,7 @@ namespace IESProjectUserApplication
         }
 
 
-        public string GetExtentValues(ModelCode modelCode)
+        public string GetExtentValues(ModelCode modelCode, List<ModelCode> properties)
         {
             string message = "Getting extent values method started.";
             Console.WriteLine(message);
@@ -89,9 +89,9 @@ namespace IESProjectUserApplication
                 int numberOfResources = 2;
                 int resourcesLeft = 0;
 
-                List<ModelCode> properties = modelResourcesDesc.GetAllPropertyIds(modelCode);
+                //List<ModelCode> properties = modelResourcesDesc.GetAllPropertyIds(modelCode);
 
-                iteratorId = GdaQueryProxy.GetExtentValues(modelCode, properties);
+                iteratorId = GdaQueryProxy.GetExtentValues(modelCode, (List<ModelCode>)properties);
                 resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
 
 
@@ -125,32 +125,27 @@ namespace IESProjectUserApplication
             return ResourceDescriptionToString(result);
         }
 
-        public List<long> GetRelatedValues(long sourceGlobalId, Association association)
+        public string GetRelatedValues(long sourceGlobalId, Association association)
         {
             string message = "Getting related values method started.";
             Console.WriteLine(message);
             CommonTrace.WriteTrace(CommonTrace.TraceError, message);
 
             List<long> resultIds = new List<long>();
+            List<ResourceDescription> listRds = new List<ResourceDescription>();
 
-
-            XmlTextWriter xmlWriter = null;
             int numberOfResources = 2;
 
             try
             {
                 List<ModelCode> properties = new List<ModelCode>();
-                //properties.Add(ModelCode.IDOBJ_DESCRIPTION);
-                //properties.Add(ModelCode.IDOBJ_ALIASNAME);
-                //properties.Add(ModelCode.IDOBJ_MRID);
-                //properties.Add(ModelCode.IDOBJ_NAME);
-                properties = modelResourcesDesc.GetAllPropertyIds(association.Type); //deja: moja izmena od ovoga iznad
+                properties = modelResourcesDesc.GetAllPropertyIds(ModelResourcesDesc.GetTypeFromModelCode(association.PropertyId)); //deja: moja izmena od ovoga iznad
+                //treba mi da iz npr terminal_hasfirstmutualcoupling skontam da su to pokazivaci ka mutual couplingu
 
                 int iteratorId = GdaQueryProxy.GetRelatedValues(sourceGlobalId, properties, association);
                 int resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
 
-                //xmlWriter = new XmlTextWriter(Config.Instance.ResultDirecotry + "\\GetRelatedValues_Results.xml", Encoding.Unicode);
-                xmlWriter.Formatting = Formatting.Indented;
+                
 
                 while (resourcesLeft > 0)
                 {
@@ -159,8 +154,7 @@ namespace IESProjectUserApplication
                     for (int i = 0; i < rds.Count; i++)
                     {
                         resultIds.Add(rds[i].Id);
-                        rds[i].ExportToXml(xmlWriter);
-                        xmlWriter.Flush();
+                        listRds.Add(rds[i]);
                     }
 
                     resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
@@ -178,15 +172,8 @@ namespace IESProjectUserApplication
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceError, message);
             }
-            finally
-            {
-                if (xmlWriter != null)
-                {
-                    xmlWriter.Close();
-                }
-            }
 
-            return resultIds;
+            return ResourceDescriptionToString(listRds);
         }
 
         #endregion GDAQueryService
