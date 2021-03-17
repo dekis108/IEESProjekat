@@ -55,6 +55,11 @@ namespace IESProjectUserApplication
 
         private void btnExtentValues_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBoxModelSelect.Items.Count == 0)
+            {
+                return;
+            }
+
             List<ModelCode> props = new List<ModelCode>();
             foreach(var prop in listBoxPropertiesExtent.SelectedItems)
             {
@@ -70,6 +75,11 @@ namespace IESProjectUserApplication
 
         private void btnGetValues_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBoxIdSelect.Items.Count == 0)
+            {
+                return;
+            }
+
             List<ModelCode> props = new List<ModelCode>();
             foreach (var prop in listBoxProperties.SelectedItems)
             {
@@ -80,6 +90,11 @@ namespace IESProjectUserApplication
 
         private void btnGetRelatedValues_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBoxSelectAssType.Items.Count == 0)
+            {
+                return;
+            }
+
             Association ass = new Association();
 
             ass.PropertyId = (ModelCode)comboBoxSelectAssType.SelectedItem;
