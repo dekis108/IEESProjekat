@@ -143,18 +143,21 @@ namespace IESProjectUserApplication
             }
 
             comboBoxSelectAssType.ItemsSource = codes;
-            comboBoxSelectAssType.SelectedItem = comboBoxSelectAssType.Items[0];
+            if (comboBoxSelectAssType.Items.Count != 0)
+                comboBoxSelectAssType.SelectedItem = comboBoxSelectAssType.Items[0];
         }
 
         private void comboBoxSelectAssType_Initialized(object sender, EventArgs e)
         {
             comboBoxIdSelectRelated.SelectionChanged += comboBoxIdSelectRelated_SelectionChanged;
-            comboBoxIdSelectRelated.SelectedItem = comboBoxIdSelectRelated.Items[0];
+            if (comboBoxIdSelectRelated.Items.Count != 0)
+                comboBoxIdSelectRelated.SelectedItem = comboBoxIdSelectRelated.Items[0];
         }
 
         private void listBoxPropertiesExtent_Initialized(object sender, EventArgs e)
         {
-            comboBoxModelSelect.SelectedItem = comboBoxModelSelect.Items[0];
+            if (comboBoxModelSelect.Items.Count != 0)
+                comboBoxModelSelect.SelectedItem = comboBoxModelSelect.Items[0];
         }
 
         private void comboBoxModelSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -166,7 +169,8 @@ namespace IESProjectUserApplication
 
         private void listBoxProperties_Initialized(object sender, EventArgs e)
         {
-            comboBoxIdSelect.SelectedItem = comboBoxIdSelect.Items[0];
+            if (comboBoxIdSelect.Items.Count != 0)
+                comboBoxIdSelect.SelectedItem = comboBoxIdSelect.Items[0];
         }
 
         private void comboBoxIdSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -180,7 +184,8 @@ namespace IESProjectUserApplication
 
         private void listBoxPropertiesRelated_Initialized(object sender, EventArgs e)
         {
-            comboBoxSelectAssFilter.SelectedItem = comboBoxSelectAssFilter.Items[0];
+            if (comboBoxSelectAssFilter.Items.Count != 0) 
+                comboBoxSelectAssFilter.SelectedItem = comboBoxSelectAssFilter.Items[0];
         }
 
         private void comboBoxSelectAssFilter_Initialized(object sender, EventArgs e)
