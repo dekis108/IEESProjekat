@@ -17,6 +17,7 @@ namespace IESProjectUserApplication
 {
     public class TestGda : IDisposable
     {
+        private List<long> allTypes;
 
         private ModelResourcesDesc modelResourcesDesc = new ModelResourcesDesc();
 
@@ -68,6 +69,8 @@ namespace IESProjectUserApplication
                 message = string.Format("Getting values method for entered id = {0} failed.\n\t{1}", globalId, e.Message);
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceError, message);
+
+                throw new ApplicationException(message);
             }
 
             return ResourceDescriptionToString(new List<ResourceDescription>() { rd });
@@ -120,6 +123,8 @@ namespace IESProjectUserApplication
                 message = string.Format("Getting extent values method failed for {0}.\n\t{1}", modelCode, e.Message);
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceError, message);
+
+                throw new ApplicationException(message);
             }
 
             return ResourceDescriptionToString(result);
@@ -134,19 +139,26 @@ namespace IESProjectUserApplication
             List<long> resultIds = new List<long>();
             List<ResourceDescription> listRds = new List<ResourceDescription>();
 
-            int numberOfResources = 2;
+            int numberOfResources = 2, iteratorId, resourcesLeft;
 
-            try
-            {
+            
                 //List<ModelCode> properties = new List<ModelCode>();
                 //properties = modelResourcesDesc.GetAllPropertyIds(ModelResourcesDesc.GetTypeFromModelCode(association.PropertyId)); 
 
+            try
+            {
+                iteratorId = GdaQueryProxy.GetRelatedValues(sourceGlobalId, properties, association);
+                resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
+            }
+            catch
+            {
+                throw new ApplicationException(message);
+            }
+        
 
-                int iteratorId = GdaQueryProxy.GetRelatedValues(sourceGlobalId, properties, association);
-                int resourcesLeft = GdaQueryProxy.IteratorResourcesLeft(iteratorId);
 
-                
-
+            try
+            {
                 while (resourcesLeft > 0)
                 {
                     List<ResourceDescription> rds = GdaQueryProxy.IteratorNext(numberOfResources, iteratorId);
@@ -205,6 +217,7 @@ namespace IESProjectUserApplication
 
             foreach (ResourceDescription rd in rds)
             {
+
                 result += string.Format($"Resource: {rd.Id}\n");
                 foreach (Property prop in rd.Properties)
                 {
@@ -234,6 +247,11 @@ namespace IESProjectUserApplication
 
         public List<long> TestGetExtentValuesAllTypes()
         {
+            if (allTypes != null)
+            {
+                return allTypes;
+            }
+
             string message = "Getting extent values for all DMS types started.";
             Console.WriteLine(message);
             CommonTrace.WriteTrace(CommonTrace.TraceInfo, message);
@@ -293,6 +311,7 @@ namespace IESProjectUserApplication
                 throw;
             }
 
+            allTypes = ids;
             return ids;
         }
 

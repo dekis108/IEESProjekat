@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="542.126" Width="800">
     <Grid>
-        <TabControl>
+        <TabControl Margin="0,0,395,0">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel>
@@ -47,9 +47,11 @@
                 </Grid>
             </TabItem>
 
+
         </TabControl>
         <ScrollViewer Margin="397,42,10,10">
             <TextBlock x:Name="txtBlockOutput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
         </ScrollViewer>
+        <Label x:Name="labelWarning" Content="Unable to connect to service" HorizontalAlignment="Left" Margin="402,0,0,0" VerticalAlignment="Top" Width="236" Foreground="#FFFF0505" Visibility="Hidden"/>
     </Grid>
 </Window>

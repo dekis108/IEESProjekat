@@ -22,13 +22,34 @@ namespace IESProjectUserApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<long> allTypes;
         private const string noFilterMsg = "No filter";
         private TestGda tgda;
 
         public MainWindow()
         {
-            IntializeTestGda();
-            InitializeComponent();
+            try
+            {
+                IntializeTestGda();
+                InitializeComponent();
+            }
+            catch
+            {
+                ServiceDisconnected();
+            }
+        }
+
+        private void ServiceDisconnected()
+        {
+            if (labelWarning != null)
+            {
+                labelWarning.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Unable to connect to service", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            //tgda = null;
         }
 
         private void IntializeTestGda()
@@ -65,12 +86,48 @@ namespace IESProjectUserApplication
             {
                 props.Add((ModelCode)prop);
             }
-            txtBlockOutput.Text = tgda.GetExtentValues((ModelCode)comboBoxModelSelect.SelectedItem, props);
+
+            try
+            {
+                txtBlockOutput.Text = tgda.GetExtentValues((ModelCode)comboBoxModelSelect.SelectedItem, props);
+            }
+            catch(ApplicationException ex)
+            {
+                ServiceDisconnected();
+            }
         }
 
         private void comboBoxIdSelect_Initialized(object sender, EventArgs e)
         {
-            comboBoxIdSelect.ItemsSource = tgda.TestGetExtentValuesAllTypes();
+            try
+            {
+                comboBoxIdSelect.ItemsSource = GetAllTypes();
+            }
+            catch {
+                ServiceDisconnected();
+            }
+
+        }
+
+        private List<long> GetAllTypes()
+        {
+            if (allTypes != null)
+            {
+                return allTypes;
+            }
+            else
+            {
+                try
+                {
+                    allTypes = tgda.TestGetExtentValuesAllTypes();
+                }
+                catch
+                {
+                    allTypes = new List<long>();
+                    ServiceDisconnected();
+                }
+                return allTypes;
+            }
         }
 
         private void btnGetValues_Click(object sender, RoutedEventArgs e)
@@ -85,7 +142,16 @@ namespace IESProjectUserApplication
             {
                 props.Add((ModelCode)prop);
             }
-            txtBlockOutput.Text = tgda.GetValues((long)comboBoxIdSelect.SelectedItem, props);
+
+            try
+            {
+                txtBlockOutput.Text = tgda.GetValues((long)comboBoxIdSelect.SelectedItem, props);
+            }
+            catch(ApplicationException ex)
+            {
+                ServiceDisconnected();
+            }
+
         }
 
         private void btnGetRelatedValues_Click(object sender, RoutedEventArgs e)
@@ -122,11 +188,21 @@ namespace IESProjectUserApplication
                 MessageBox.Show("Selected properties do not match found instances.\nAdditional message:" + ex.Message, "Incorrect querry",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            catch (ApplicationException ex)
+            {
+                ServiceDisconnected();
+            }
         }
 
         private void comboBoxIdSelectRelated_Initialized(object sender, EventArgs e) 
         {
-            comboBoxIdSelectRelated.ItemsSource = tgda.TestGetExtentValuesAllTypes();
+            try
+            {
+                comboBoxIdSelectRelated.ItemsSource = GetAllTypes();
+            }
+            catch {
+                ServiceDisconnected();
+            }
         }
 
         private void comboBoxIdSelectRelated_SelectionChanged(object sender, SelectionChangedEventArgs e)
