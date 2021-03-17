@@ -53,5 +53,6 @@
             <TextBlock x:Name="txtBlockOutput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
         </ScrollViewer>
         <Label x:Name="labelWarning" Content="Unable to connect to service" HorizontalAlignment="Left" Margin="402,0,0,0" VerticalAlignment="Top" Width="236" Foreground="#FFFF0505" Visibility="Hidden"/>
+        <Button x:Name="btnReconnect" Content="Refresh connection" HorizontalAlignment="Left" Margin="672,17,0,0" VerticalAlignment="Top" Width="110" Click="btnReconnect_Click"/>
     </Grid>
 </Window>

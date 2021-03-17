@@ -54,6 +54,7 @@ namespace IESProjectUserApplication
 
         private void IntializeTestGda()
         {
+            allTypes = null;
             tgda = new TestGda();
         }
 
@@ -101,7 +102,7 @@ namespace IESProjectUserApplication
         {
             try
             {
-                comboBoxIdSelect.ItemsSource = GetAllTypes();
+                GetAllTypes(sender);
             }
             catch {
                 ServiceDisconnected();
@@ -109,11 +110,11 @@ namespace IESProjectUserApplication
 
         }
 
-        private List<long> GetAllTypes()
+        private void GetAllTypes(object sender)
         {
             if (allTypes != null)
             {
-                return allTypes;
+                ((ComboBox)sender).ItemsSource = allTypes;
             }
             else
             {
@@ -126,7 +127,7 @@ namespace IESProjectUserApplication
                     allTypes = new List<long>();
                     ServiceDisconnected();
                 }
-                return allTypes;
+                ((ComboBox)sender).ItemsSource = allTypes;
             }
         }
 
@@ -198,7 +199,7 @@ namespace IESProjectUserApplication
         {
             try
             {
-                comboBoxIdSelectRelated.ItemsSource = GetAllTypes();
+                GetAllTypes(sender);
             }
             catch {
                 ServiceDisconnected();
@@ -318,6 +319,13 @@ namespace IESProjectUserApplication
                 props = modelResources.GetAllPropertyIds((ModelCode)Enum.Parse(typeof(ModelCode),comboBoxSelectAssFilter.SelectedItem.ToString()));
             }
             listBoxPropertiesRelated.ItemsSource = props;
+        }
+
+        private void btnReconnect_Click(object sender, RoutedEventArgs e)
+        {
+            IntializeTestGda();
+            GetAllTypes(comboBoxIdSelect);
+            GetAllTypes(comboBoxIdSelectRelated);
         }
     }
 }
