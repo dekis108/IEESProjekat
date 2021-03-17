@@ -44,12 +44,24 @@ namespace IESProjectUserApplication
             if (labelWarning != null)
             {
                 labelWarning.Visibility = Visibility.Visible;
+                btnExtentValues.IsEnabled = false;
+                btnGetRelatedValues.IsEnabled = false;
+                btnGetValues.IsEnabled = false;
             }
             else
             {
                 MessageBox.Show("Unable to connect to service", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            //tgda = null;
+        }
+
+        private void Connected()
+        {
+            GetAllTypes(comboBoxIdSelect);
+            GetAllTypes(comboBoxIdSelectRelated);
+            labelWarning.Visibility = Visibility.Hidden;
+            btnExtentValues.IsEnabled = true;
+            btnGetRelatedValues.IsEnabled = true;
+            btnGetValues.IsEnabled = true;
         }
 
         private void IntializeTestGda()
@@ -286,6 +298,8 @@ namespace IESProjectUserApplication
 
             modelCodes.Add(noFilterMsg);
 
+
+
             foreach (DMSType type in Enum.GetValues(typeof(DMSType))) //depends on DMSType and ModelCode having the same string name
                                                                       //mozda iskoristi GetModelCodeFromType
             {
@@ -323,9 +337,16 @@ namespace IESProjectUserApplication
 
         private void btnReconnect_Click(object sender, RoutedEventArgs e)
         {
-            IntializeTestGda();
-            GetAllTypes(comboBoxIdSelect);
-            GetAllTypes(comboBoxIdSelectRelated);
+            try
+            {
+                IntializeTestGda();
+                tgda.TestGetExtentValuesAllTypes();
+                Connected();
+            }
+            catch
+            {
+                ServiceDisconnected();
+            }
         }
     }
 }
